@@ -72,7 +72,7 @@
 			events: [
 			<?php
 				foreach($appointments as $appointment){
-					echo "{".(!empty($loaded_appointment->id) && ($appointment->id == $loaded_appointment->id) ? "borderColor: '#f56954',":"")."url: '" . base_url() . "/index.php/appointments/getAppointment/" . $appointment->id . "', title: '".$appointment->firstname." ".$appointment->lastname.": ".$appointment->subject."', start: new Date('".$appointment->start_date."'),end: new Date('".$appointment->end_date."')},";
+					echo "{".(!empty($loaded_appointment->id) && ($appointment->id == $loaded_appointment->id) ? "textColor: 'yellow', borderColor: 'yellow',":"")."url: '" . base_url() . "/index.php/appointments/getAppointment/" . $appointment->id . "', title: '".$appointment->firstname." ".$appointment->lastname.": ".$appointment->subject."', start: new Date('".$appointment->start_date."'),end: new Date('".$appointment->end_date."')},";
 				}
 			?>
 				/*{
