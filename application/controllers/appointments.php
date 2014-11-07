@@ -18,6 +18,8 @@ class Appointments extends MY_Controller {
 		
 		$data['appointments'] = $this->appointments_model->getAppointments($customer);
 		
+		$data['customers'] = $this->customers_model->loadCustomers();
+		
 		if($appointment !== FALSE)
 			$data['loaded_appointment'] = $this->appointments_model->getAppointments($customer, $appointment);
 		
@@ -35,13 +37,17 @@ class Appointments extends MY_Controller {
 		$customer = $this->input->post('customer_id');
 		$subject = $this->input->post('subject');
 		$message = $this->input->post('message');
-		$start_date_time = $this->input->post('start_date_time');
-		$end_date_time = $this->input->post('end_date_time');
+		$start_date = explode("/", $this->input->post('start_date'));
+		$end_date = explode("/", $this->input->post('end_date'));
+		$start_time = $this->input->post('start_time');
+		$end_time = $this->input->post('end_time');
 		$location = $this->input->post('location');
 		$reminder = $this->input->post('reminder');
 	
-		$this->appointments_model->saveAppointment($appointment_id, $customer, $subject, $message, $start_date_time, $end_date_time, $location, $reminder);
-	
+		$this->appointments_model->saveAppointment(empty($appointment_id) ? FALSE : $appointment_id , $customer, $subject, $message, $start_date[2]."-".$start_date[1]."-".$start_date[0], $start_time, $end_date[2]."-".$end_date[1]."-".$end_date[0], $end_time, $location, $reminder);
+		
+		$data['success_messages'][] = "Operation successfully completed";
+		
 		$this->getAppointment();
 	}
 	

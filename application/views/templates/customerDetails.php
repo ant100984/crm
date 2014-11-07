@@ -218,7 +218,7 @@
 					<input type="hidden" id="customer_id" name="customer_id" value="<?php if(!empty($customer->id)) echo $customer->id; ?>"/>
 					<div class="form-group">
 					   <label for="attachment">Upload an attachment</label>
-					   <input type="file" class="form-control" id="attachment" name="attachment" placeholder="" required value="">
+					   <input type="file" class="form-control" id="attachment" name="attachment" placeholder="" value="">
 					</div>
 					<div class="form-group">
 						<button type="submit" name="upload" class="btn btn-success">Upload</button>
@@ -235,5 +235,8 @@
 	$(function() {
 		$("#dob").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 		$("#policy_date").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+		
+		$("#dob").datepicker();
+		$("#policy_date").datepicker();
 	});
 </script>

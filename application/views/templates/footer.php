@@ -16,8 +16,14 @@
         <script src="<?php echo base_url();?>js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
         <!-- daterangepicker -->
         <script src="<?php echo base_url();?>js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <!-- datepicker -->
+        <!-- InputMask -->
+        <script src="<?php echo base_url();?>js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+        <script src="<?php echo base_url();?>js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+        <script src="<?php echo base_url();?>js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+		<!-- datepicker -->
         <script src="<?php echo base_url();?>js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+		<!-- timepicker -->
+		<script src="<?php echo base_url();?>js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="<?php echo base_url();?>js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <!-- iCheck -->

@@ -14,6 +14,8 @@
         <link href="<?php echo base_url();?>css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
         <!-- Date Picker -->
         <link href="<?php echo base_url();?>css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+		<!-- Bootstrap time Picker -->
+        <link href="<?php echo base_url();?>css/timepicker/bootstrap-timepicker.min.css" rel="stylesheet"/>
         <!-- Daterange picker -->
         <link href="<?php echo base_url();?>css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <!-- bootstrap wysihtml5 - text editor -->
@@ -35,10 +37,6 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
 		
-		 <!-- InputMask -->
-        <script src="<?php echo base_url();?>js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
-        <script src="<?php echo base_url();?>js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
-        <script src="<?php echo base_url();?>js/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
     </head>
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
