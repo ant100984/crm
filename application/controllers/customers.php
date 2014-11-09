@@ -6,8 +6,8 @@ class Customers extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->model('policies_model');
-		$this->load->model('customers_model');
-		$this->load->model('customerattachments_model');
+		$this->load->model('users_model');
+		$this->load->model('attachments_model');
 		$this->load->model('groups_model');
 		$this->load->helper('url');
 		$this->load->helper('date');
@@ -27,8 +27,8 @@ class Customers extends MY_Controller {
 		
 		if($customer !== FALSE){
 			$data['policies'] = $this->policies_model->getPolicies(FALSE,$customer,FALSE);
-			$data['customer'] = $this->customers_model->loadCustomers($customer);
-			$data['attachments'] = $this->customerattachments_model->getAttachments($customer);
+			$data['customer'] = $this->users_model->loadCustomers($customer);
+			$data['attachments'] = $this->attachments_model->getAttachments($customer);
 			
 			if($policy !== FALSE)
 				$data['loaded_policy'] = $this->policies_model->getPolicies(FALSE,$customer,$policy); 
@@ -44,6 +44,16 @@ class Customers extends MY_Controller {
 		$this->load->view('templates/footer');
 	}
 	
+	public function filterCustomers(){
+		
+		$filter_string = $this->input->post('filter_string');
+	
+		$data['customers'] = $this->users_model->filterCustomers($filter_string);
+		$this->load->vars($data);
+		$this->load->view('templates/customersListAjax');
+	
+	}
+	
 	public function index(){	
 		$data['location'] = 'Customers List';
 		
@@ -53,7 +63,7 @@ class Customers extends MY_Controller {
 		$group = $this->input->post('group');
 		$smoker = $this->input->post('smoker');
 		
-		$data['customers'] = $this->customers_model->loadCustomers(FALSE, empty($firstname) ? FALSE : $firstname, empty($lastname) ? FALSE : $lastname, empty($gender) ? FALSE : $gender, empty($group) ? FALSE : $group, empty($smoker) ? FALSE : $smoker);
+		$data['customers'] = $this->users_model->loadCustomers(FALSE, empty($firstname) ? FALSE : $firstname, empty($lastname) ? FALSE : $lastname, empty($gender) ? FALSE : $gender, empty($group) ? FALSE : $group, empty($smoker) ? FALSE : $smoker);
 		$data['groups'] = $this->groups_model->getGroups();
 		$data['filter_firstname'] = $firstname;
 		$data['filter_lastname'] = $lastname;
@@ -72,7 +82,7 @@ class Customers extends MY_Controller {
 	
 	public function setCustomerEnabled($customer, $enabled){
 		
-		$this->customers_model->setCustomerEnabled($customer, $enabled);
+		$this->users_model->setUserEnabled($customer, $enabled);
 		
 		$data['success_messages'][] = "Operation successfully completed";
 		$this->load->vars($data);
@@ -148,7 +158,7 @@ class Customers extends MY_Controller {
 	
 		}
 		
-		$this->customers_model->saveCustomer($profile_photo,$customer_id,$dob[2]."-".$dob[1]."-".$dob[0],$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes);
+		$this->users_model->saveCustomer($profile_photo,$customer_id,$dob[2]."-".$dob[1]."-".$dob[0],$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes);
 		
 		$data['success_messages'][] = "Operation successfully completed";
 		
@@ -178,14 +188,14 @@ class Customers extends MY_Controller {
 		}else{
 			$upload_data = array('upload_data' => $this->upload->data());
 			$data['success_messages'][] = "Operation successfully completed";
-			$this->customers_model->saveAttachment($upload_data['upload_data']['file_name'],$this->config->item('attachments_folder')."/".$upload_data['upload_data']['file_name'],$customer_id);
+			$this->users_model->saveAttachment($upload_data['upload_data']['file_name'],$this->config->item('attachments_folder')."/".$upload_data['upload_data']['file_name'],$customer_id);
 		}
 		$this->load->vars($data);
 		$this->getCustomer($customer_id);
 	}
 	
 	public function deleteAttachment($customer, $id){
-		$this->customers_model->deleteAttachment($id);
+		$this->users_model->deleteAttachment($id);
 		$data['success_messages'][] = "Operation successfully completed";
 		$this->getCustomer($customer);
 	}

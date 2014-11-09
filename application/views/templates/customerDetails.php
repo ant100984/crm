@@ -1,89 +1,98 @@
 <div class="row">
   <div class="col-md-6">
-	<form method="post" action="<?php echo base_url(); echo "/index.php/customers/saveCustomer"; ?>" enctype="multipart/form-data">
-		<input type="hidden" id="customer_id" name="customer_id" value="<?php if(!empty($customer->id)) echo $customer->id; ?>"/>
-	 <fieldset>
-		<div class="form-group">
-			<button type="submit" name="save" class="btn btn-success"><?php if(!empty($customer->id)) echo "Update"; else echo "Save"; ?></button>
-		</div>
-		<div class="form-group">
-			<label for="group">Group</label>
-			<select name="group" class="form-control">
-				<option value="-1"></option>
+		<form method="post" action="<?php echo base_url(); echo "/index.php/customers/saveCustomer"; ?>" enctype="multipart/form-data">
+			<input type="hidden" id="customer_id" name="customer_id" value="<?php if(!empty($customer->id)) echo $customer->id; ?>"/>
+			 <fieldset>
 				<?php
-					foreach($groups as $group){
-						echo "<option value='".$group->id."' ".(!empty($customer->id) && $customer->group == $group->id ? "selected" : "").">".$group->group_name."</option>";
-					}
+					if(empty($loaded_policy->id)){
 				?>
-			</select>
-		</div>
-		<div class="form-group">
-			<div class="form-group">
-				<label for="logo">Profile photo</label>
-			</div>
-		   <img style="margin-bottom: 20px;" src="<?php echo base_url(); if(!empty($customer->profilephoto)) echo $customer->profilephoto; else echo "img/no_image.png";?>" width="100" height="100"/>
-		   <input type="file" class="form-control" id="profile_photo" name="profile_photo" placeholder="" value="">
-		</div>
-	  <div class="form-group">
-	   <label for="company">First Name</label>
-	   <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" required value="<?php if(!empty($customer->firstname)) echo $customer->firstname;?>">
-	  </div>
-	  <div class="form-group">
-	   <label for="street_name">Last Name</label>
-	   <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" required value="<?php if(!empty($customer->lastname)) echo $customer->lastname;?>">
-	  </div>
-	  
-	  <div class="form-group">
-		<label for="postcode">Date of Birth</label>
-		<div class="input-group">
-			<div class="input-group-addon">
-				<i class="fa fa-calendar"></i>
-			</div>
-			<input type="text" class="form-control" id="dob" name="dob" placeholder="" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php if(!empty($customer->dateofbirth)) echo $customer->dateofbirth;?>">
-		</div>
-	  </div>
-		
-		<div class="form-group">
-			<label for="gender">Gender</label>
-			<select name="gender" class="form-control">
-				<option value="M" <?php if(!empty($customer->gender) && $customer->gender == 'M' ) echo "selected";?> >Male</option>
-				<option value="F" <?php if(!empty($customer->gender) && $customer->gender == 'F' ) echo "selected";?> >Female</option>
-			</select>
-		</div>
-	  
-	  <div class="form-group">
-	   <label for="occupation">Occupation</label>
-	   <input type="text" class="form-control" id="occupation" name="occupation" placeholder="" value="<?php if(!empty($customer->occupation)) echo $customer->occupation;?>">
-	  </div>
-	  <div class="form-group">
-	  <label for="smoker">Smoker</label>
-		<select name="smoker" class="form-control">
-			<option value="N" <?php if(!empty($customer->smoker) && $customer->smoker == 'N') echo "selected";?> >No</option>
-			<option value="Y" <?php if(!empty($customer->smoker) && $customer->smoker == 'Y') echo "selected";?> >Yes</option>
-		</select>
-	  </div>
-	  <div class="form-group">
-	   <label for="email">Email</label>
-	   <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?php if(!empty($customer->email)) echo $customer->email;?>">
-	  </div>
-	  <div class="form-group">
-	   <label for="home_address">Home Address</label>
-	   <input type="text" class="form-control" id="home_address" name="home_address" placeholder="" required value="<?php if(!empty($customer->homeaddress)) echo $customer->homeaddress;?>">
-	  </div>
-	  <div class="form-group">
-	   <label for="business_address">Business Address</label>
-	   <input type="text" class="form-control" id="business_address" name="business_address" placeholder="" required value="<?php if(!empty($customer->businessaddress)) echo $customer->businessaddress;?>">
-	  </div>
-	  <div class="form-group">
-	   <label for="NRIC">NRIC</label>
-	   <input type="text" class="form-control" id="NRIC" name="NRIC" placeholder="" required value="<?php if(!empty($customer->nric)) echo $customer->nric;?>">
-	  </div>
-	  <div class="form-group">
-	   <label for="note">Note</label>
-	   <textarea id="note" name="note"><?php if(!empty($customer->notes)) echo $customer->notes;?></textarea>
-	  </div>
-	 </fieldset>
-	</form>
+					<div class="form-group">
+						<button type="submit" name="save" class="btn btn-success"><?php if(!empty($customer->id)) echo "Update"; else echo "Save"; ?></button>
+					</div>
+				<?php
+				}
+				?>
+				<div class="box">
+					<div class="form-group">
+						<label for="group">Group</label>
+						<select name="group" class="form-control">
+							<option value="-1"></option>
+							<?php
+								foreach($groups as $group){
+									echo "<option value='".$group->id."' ".(!empty($customer->id) && $customer->group == $group->id ? "selected" : "").">".$group->group_name."</option>";
+								}
+							?>
+						</select>
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<label for="logo">Profile photo</label>
+						</div>
+					   <img class="img-circle" style="margin-bottom: 20px;" src="<?php echo base_url(); if(!empty($customer->profilephoto)) echo $customer->profilephoto; else echo "img/no_image.png";?>" width="100"/>
+					   <input type="file" class="form-control" id="profile_photo" name="profile_photo" placeholder="" value="">
+					</div>
+				  <div class="form-group">
+				   <label for="company">First Name</label>
+				   <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" required value="<?php if(!empty($customer->firstname)) echo $customer->firstname;?>">
+				  </div>
+				  <div class="form-group">
+				   <label for="street_name">Last Name</label>
+				   <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" required value="<?php if(!empty($customer->lastname)) echo $customer->lastname;?>">
+				  </div>
+				  
+				  <div class="form-group">
+					<label for="postcode">Date of Birth</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="text" class="form-control" id="dob" name="dob" placeholder="" required data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php if(!empty($customer->dateofbirth)) echo $customer->dateofbirth;?>">
+					</div>
+				  </div>
+					
+					<div class="form-group">
+						<label for="gender">Gender</label>
+						<select name="gender" class="form-control">
+							<option value="M" <?php if(!empty($customer->gender) && $customer->gender == 'M' ) echo "selected";?> >Male</option>
+							<option value="F" <?php if(!empty($customer->gender) && $customer->gender == 'F' ) echo "selected";?> >Female</option>
+						</select>
+					</div>
+				  
+				  <div class="form-group">
+				   <label for="occupation">Occupation</label>
+				   <input type="text" class="form-control" id="occupation" name="occupation" placeholder="" value="<?php if(!empty($customer->occupation)) echo $customer->occupation;?>">
+				  </div>
+				  <div class="form-group">
+				  <label for="smoker">Smoker</label>
+					<select name="smoker" class="form-control">
+						<option value="N" <?php if(!empty($customer->smoker) && $customer->smoker == 'N') echo "selected";?> >No</option>
+						<option value="Y" <?php if(!empty($customer->smoker) && $customer->smoker == 'Y') echo "selected";?> >Yes</option>
+					</select>
+				  </div>
+				  <div class="form-group">
+				   <label for="email">Email</label>
+				   <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?php if(!empty($customer->email)) echo $customer->email;?>">
+				  </div>
+				  <div class="form-group">
+				   <label for="home_address">Home Address</label>
+				   <input type="text" class="form-control" id="home_address" name="home_address" placeholder="" required value="<?php if(!empty($customer->homeaddress)) echo $customer->homeaddress;?>">
+				  </div>
+				  <div class="form-group">
+				   <label for="business_address">Business Address</label>
+				   <input type="text" class="form-control" id="business_address" name="business_address" placeholder="" required value="<?php if(!empty($customer->businessaddress)) echo $customer->businessaddress;?>">
+				  </div>
+				  <div class="form-group">
+				   <label for="NRIC">NRIC</label>
+				   <input type="text" class="form-control" id="NRIC" name="NRIC" placeholder="" required value="<?php if(!empty($customer->nric)) echo $customer->nric;?>">
+				  </div>
+				  <div class="form-group">
+				   <label for="note">Notes</label>
+				   <textarea class="form-control" id="note" name="note"><?php if(!empty($customer->notes)) echo $customer->notes;?></textarea>
+				  </div>
+				  <div class="overlay edit_policy_overlay" style="display: none;"></div>
+				</div>
+			 </fieldset>
+		</form>
   </div>
   <?php
   if(!empty($customer->id)){
@@ -116,8 +125,8 @@
 									echo "<td>".$policy->reminder."</td>";
 									echo "<td>".$policy->status."</td>";
 									echo "<td>".$policy->notes."</td>";
-									echo "<td>";
-										echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."/".$policy->id."' class='btn btn-xs btn-neutral' role='button'><span class='glyphicon glyphicon-pencil'></span> Edit</a>";
+									echo "<td style='width: 150px;'>";
+										echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."/".$policy->id."' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Edit</a>";
 										echo "<a href='".base_url()."/index.php/customers/deletePolicy/".$customer->id."/".$policy->id."' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
 									echo "</td>";
 								echo "</tr>";
@@ -126,6 +135,7 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="overlay edit_policy_overlay" style="display: none;"></div>
 		</div>
 		<div class="box">
 			<div class="box-header">
@@ -175,10 +185,17 @@
 					  </div>
 					  <div class="form-group">
 					   <label for="policy_notes">Notes</label>
-					   <input type="text" class="form-control" id="policy_notes" name="policy_notes" placeholder="" required value="<?php if(!empty($loaded_policy->notes)) echo $loaded_policy->notes;?>">
+					   <textarea class="form-control" id="policy_notes" name="policy_notes"><?php if(!empty($loaded_policy->notes)) echo $loaded_policy->notes;?></textarea>
 					  </div>
 					  <div class="form-group">
 							<button type="submit" name="save" class="btn btn-success"><?php if(!empty($loaded_policy->id)) echo "Update"; else echo "Insert"; ?></button>
+							<?php
+								if(!empty($loaded_policy->id)){
+							?>
+									<a href="<?php echo base_url() . "/index.php/customers/getCustomer/".$customer->id; ?>" class="btn btn-danger">Cancel</a>
+							<?php
+								}
+							?>
 						</div>
 					</fieldset>
 				</form>
@@ -197,9 +214,9 @@
 							foreach($attachments as $attachment){
 								echo "<tr>";
 									echo "<td>".$attachment->attachment_name."</td>";
-									echo "<td>";
-										echo "<a target='_blank' href='".base_url().$attachment->attachment_path."' class='btn btn-xs btn-neutral' role='button'><span class='glyphicon glyphicon-search'></span> View</a>";
-										echo "<a href='".base_url()."/index.php/customers/deleteAttachment/".$attachment->customer_id."/".$attachment->id."' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
+									echo "<td style='width: 150px;'>";
+										echo "<a target='_blank' href='".base_url().$attachment->attachment_path."' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-search'></span> View</a>";
+										echo "<a href='".base_url()."/index.php/customers/deleteAttachment/".$attachment->user_id."/".$attachment->id."' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
 									echo "</td>";
 								echo "</tr>";
 							}
@@ -207,6 +224,7 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="overlay edit_policy_overlay" style="display: none;"></div>
 		</div>
 		<div class="box">
 			<div class="box-header">
@@ -225,6 +243,7 @@
 					</div>
 				</form>
 			</div>
+			<div class="overlay edit_policy_overlay" style="display: none;"></div>
 		</div>
 	  </div>
   <?php
@@ -233,6 +252,10 @@
 </div>
 <script type="text/javascript">
 	$(function() {
+		
+		if('<?php if(!empty($loaded_policy->id)) echo 'stuff'; ?>' != '')
+			$('.edit_policy_overlay').show();
+	
 		$("#dob").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 		$("#policy_date").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 		

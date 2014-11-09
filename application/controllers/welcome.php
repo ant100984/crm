@@ -31,7 +31,7 @@ class Welcome extends MY_Controller {
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
 		$this->load->view('templates/dashboard');
-		
+		$this->load->view('init_calendar.php');
 		$this->load->view('templates/footer');
 	}
 }

@@ -57,8 +57,8 @@
 					echo "<td>".$customer->homeaddress."</td>";
 					echo "<td>".$customer->businessaddress."</td>";
 					echo "<td>".$customer->group_name."</td>";
-					echo "<td>";
-						echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."' class='btn btn-xs btn-succes' role='button'><span class='glyphicon glyphicon-pencil'></span> Details</a>";
+					echo "<td style='width: 200px;'>";
+						echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Details</a>";
 						if($customer->enabled == 1){
 							echo "<a href='".base_url()."/index.php/customers/setCustomerEnabled/".$customer->id."/0' class='btn btn-xs btn-warning' role='button'><span class='glyphicon glyphicon-ban-circle'></span> Disable</a>";
 						}else

@@ -6,13 +6,13 @@ class Appointments_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function getAppointments($customer=FALSE, $appointment=FALSE){
-		$this->db->select('a.id, c.firstname, c.lastname, a.customer_id, DATE_FORMAT(a.end_date,"%Y/%m/%d") as end_date, DATE_FORMAT(a.end_date,"%H:%i:%s") as end_time, DATE_FORMAT(a.start_date,"%Y/%m/%d") as start_date, DATE_FORMAT(a.start_date,"%H:%i:%s") as start_time, a.subject, a.message', FALSE);
+	public function getAppointments($user=FALSE, $appointment=FALSE){
+		$this->db->select('a.id, DATE_FORMAT(a.start_date,"%Y/%m/%d %H:%i") as start_date_full, DATE_FORMAT(a.end_date,"%Y/%m/%d %H:%i") as end_date_full, u.firstname, u.lastname, a.user_id, DATE_FORMAT(a.end_date,"%d/%m/%Y") as end_date, DATE_FORMAT(a.end_date,"%H:%i") as end_time, DATE_FORMAT(a.start_date,"%d/%m/%Y") as start_date, DATE_FORMAT(a.start_date,"%H:%i") as start_time, a.subject, a.message, a.location, a.alert', FALSE);
 		$this->db->from('appointments a');
-		$this->db->join('customers c','c.id = a.customer_id');
+		$this->db->join('users u','u.id = a.user_id');
   
-		if($customer !== FALSE)
-			$this->db->where("a.customer_id = '{$customer}'");
+		if($user !== FALSE)
+			$this->db->where("a.customer_id = '{$user}'");
 		
 		if($appointment !== FALSE){
 			$this->db->where("a.id = {$appointment}");
@@ -25,26 +25,69 @@ class Appointments_model extends CI_Model {
 		return $query->result();
 	}
 		
-	public function saveAppointment($appointment_id=FALSE, $customer, $subject, $message, $start_date, $start_time, $end_date, $end_time, $location, $reminder){
-		error_log($appointment_id ." ". $customer . " " . $subject . " " . $message . " " . $start_date . " " . $start_time . " " . $end_date . " " . $end_time . " " . $location . " " . $reminder);
+	public function saveAppointment($appointment_id=FALSE, $user, $subject, $message, $start_date, $start_time, $end_date, $end_time, $location, $alert){
 		$data = array(
 			
-			'customer_id' => $customer,
+			'user_id' => $user,
 			'subject' => $subject,
 			'message' => $message,
 			'start_date' => $start_date." ".$start_time.":00",
 			'end_date' => $end_date." ".$end_time.":00",
-			'location' => $location
+			'location' => $location,
+			'alert' => $alert
 		
 		);
 	
 		if($appointment_id !== FALSE){
 			$this->db->where('id',$appointment_id);
 			$this->db->update('appointments',$data);
-			error_log("update");
 		}else{
 			$this->db->insert('appointments',$data);
-			error_log("update");
+			$appointment_id = $this->db->insert_id();
 		}
+		
+		return $appointment_id;
+	}
+	
+	public function deleteAppointment($appointment_id){
+		$this->db->delete('appointments', array('id' => $appointment_id)); 
+		$this->db->delete('appointments_remarks', array('appointment_id' => $appointment_id)); 
+	}
+	
+	public function deleteRemark($remark_id){
+		$this->db->delete('appointments_remarks', array('id' => $remark_id)); 
+	}
+		
+	public function saveRemark($remark_id = FALSE, $appointment_id, $notes){
+		$data = array(
+			'appointment_id' => $appointment_id,
+			'notes' => $notes
+		);
+		
+		if($remark_id !== FALSE){
+			$this->db->where('id',$remark_id);
+			$this->db->update('appointments_remarks', $data);
+		}else{
+			$this->db->insert('appointments_remarks', $data);
+		}
+	}
+	
+	public function getAppointmentRemarks($appointment_id=FALSE, $remark_id=FALSE){
+		$this->db->select('ar.id, ar.notes', FALSE);
+		$this->db->from('appointments_remarks ar');
+		
+		if($appointment_id !== FALSE)
+			$this->db->where('ar.appointment_id',$appointment_id);
+		
+		if($remark_id !== FALSE){
+			$this->db->where('ar.id',$remark_id);
+			$query = $this->db->get();
+		
+			return $query->row();
+		}	
+		
+		$query = $this->db->get();
+		
+		return $query->result();
 	}
 }

@@ -57,7 +57,7 @@ class Groups_model extends CI_Model {
 		);
 		
 		$this->db->where('group', $group);
-		$this->db->update('customers', $data);
+		$this->db->update('users', $data);
 	
 	}
 	

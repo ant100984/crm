@@ -6,8 +6,8 @@ class Policies_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function getPolicies($status=FALSE, $customer=FALSE, $policy=FALSE){
-		$this->db->select('p.id, p.customer_id, p.description, date_format(p.date,"%d/%m/%Y") as policy_date, p.status as status_code, ps.description as status, p.reminder as reminder_code, pr.description as reminder, p.notes', FALSE);
+	public function getPolicies($status=FALSE, $user=FALSE, $policy=FALSE){
+		$this->db->select('p.id, p.user_id, p.description, date_format(p.date,"%d/%m/%Y") as policy_date, p.status as status_code, ps.description as status, p.reminder as reminder_code, pr.description as reminder, p.notes', FALSE);
 		$this->db->from('policies p');
 		$this->db->join('policies_reminder pr','p.reminder = pr.code');
 		$this->db->join('policies_status ps','p.status = ps.code');
@@ -15,8 +15,8 @@ class Policies_model extends CI_Model {
 		if($status !== FALSE)
 			$this->db->where("p.status = '{$status}'");
 		
-		if($customer !== FALSE)
-			$this->db->where("p.customer_id = '{$customer}'");
+		if($user !== FALSE)
+			$this->db->where("p.user_id = '{$user}'");
 		
 		if($policy !== FALSE){
 			$this->db->where("p.id = '{$policy}'");
@@ -55,7 +55,7 @@ class Policies_model extends CI_Model {
 		return $query->result();
 	}
 	
-	public function savePolicy($name,$date,$reminder,$status,$notes,$id,$customer){
+	public function savePolicy($name,$date,$reminder,$status,$notes,$id,$user){
 	
 		$data = array(
 					'description' => $name,
@@ -63,7 +63,7 @@ class Policies_model extends CI_Model {
 					'reminder' => $reminder,
 					'status' => $status,
 					'notes' => $notes,
-					'customer_id' => $customer
+					'user_id' => $user
 		);
 		
 		if(!empty($id)){

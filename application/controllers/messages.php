@@ -1,19 +1,34 @@
-<?php
-class Messages extends CI_Controller {
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-	public function __construct()
-	{
+class Messages extends MY_Controller {
+
+	public function __construct(){
+	
 		parent::__construct();
 		$this->load->model('messages_model');
+		$this->load->model('groups_model');
 		$this->load->helper('url');
+		
 	}
 
 	public function index(){	
+		$data['location'] = "Instant messages";
 		
-		$data['num_messages'] = $this->messages_model->get_unreadMessagesTo();
+		$group = $this->input->post('group');
+		$direction = $this->input->post('direction');
 		
-		$this->load->view('templates/header', $data);
+		$data['groups'] = $this->groups_model->getGroups();
+		
+		$data['filter_group'] = $group;
+		$data['filter_direction'] = $direction;
+		
+		$this->load->vars($data);
+		
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu');
+		$this->load->view('templates/instantMessages');
 		$this->load->view('templates/footer');
+		
 	}
 
 }

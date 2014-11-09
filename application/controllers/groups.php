@@ -5,7 +5,7 @@ class Groups extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('customers_model');
+		$this->load->model('users_model');
 		$this->load->model('groups_model');
 		$this->load->helper('url');
 		$this->load->helper('date');
@@ -22,7 +22,7 @@ class Groups extends MY_Controller {
 		else
 			$group = $this->groups_model->getGroups($group);
 		
-		$data['customers'] = $this->customers_model->loadCustomers(FALSE,FALSE,FALSE,FALSE, $group->id);
+		$data['customers'] = $this->users_model->loadCustomers(FALSE,FALSE,FALSE,FALSE, $group->id);
 		$data['group_to_show'] = $group;
 	
 		$this->load->vars($data);

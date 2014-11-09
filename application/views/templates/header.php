@@ -77,7 +77,7 @@
 													</div>
 													<h4>
 														<?php echo $message->firstname.' '.$message->lastname; ?>
-														<small><i class="fa fa-clock-o"></i><?php echo $message->datereceived; ?></small>
+														<small><i class="fa fa-clock-o"></i><?php echo $message->datesent; ?></small>
 													</h4>
 													<p><?php echo $message->messagetext; ?></p>
 												</a>
