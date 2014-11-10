@@ -35,64 +35,19 @@
 			<div class="box-body chat" id="chat-box"  style="max-height: 500px; min-height: 500px;">
 				<div class="row">
 					<div class="col-md-8">
+						
 						<?php
-							if(sizeof($messages) == 0)
-								echo "<h5>No messages to show</h5>";
-								
-							foreach($instant_messages as $message){
+						
+							require("messagesList.php");
+						
 						?>
-								<div class="item">
-									<?php 
-										echo "<img src='".base_url().$message->sender_photo."' alt='user image' class='online'/>";
-									?>
-									<p class="message">
-										<?php 
-											if($message->sender_type != "crmuser"){
-										?>
-												<a href="#" class="name" style="display: inline !important;">
-													<?php echo $message->sender_firstname." ".$message->sender_lastname; ?>											
-												</a>
-										<?php
-										}else{
-										
-												echo $message->sender_firstname." ".$message->sender_lastname; ?>
-										
-										<?php
-										}
-										
-										if($message->sender_type == "crmuser") 
-												echo "<small class='badge bg-green'>You</small>";
-										?>
-										&nbsp;to&nbsp;
-										<?php 
-											if($message->receiver_type != "crmuser"){
-										?>
-												<a href="#" class="name" style="display: inline !important;">
-													<?php echo $message->receiver_firstname." ".$message->receiver_lastname; ?>											
-												</a>
-										<?php
-										}else{
-										
-												echo $message->receiver_firstname." ".$message->receiver_lastname; ?>
-										
-										<?php
-										}
-										
-										if($message->receiver_type == "crmuser") 
-												echo "<small class='badge bg-green'>You</small>";
-										?>
-										
-										<small class="text-muted"><i class="fa fa-clock-o"></i> <?php echo $message->datesent; ?></small></br>
-										<?php echo $message->messagetext; ?>
-									</p>
-								</div>
-						<?php
-							}
-						?>
+						
 					</div>
 					<div class="col-md-4">
 						<?php
-
+							$CUSTOMER_WIDGET_BUTTON_LABEL = "Choose a customer&nbsp;";
+							$CUSTOMER_WIDGET_CLOSEABLE = FALSE;
+							$CUSTOMER_WIDGET_LIST_HEIGHT = 400;
 							require("customerWidget.php");
 							
 						?>
@@ -111,3 +66,5 @@
 	</div>
 	
 </div><!-- /.box (chat box) --> 
+<script type="text/javascript">
+</script>

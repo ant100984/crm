@@ -9,6 +9,9 @@
 					<input type="hidden" name="appointment_id" id="appointment_id" value="<?php if(!empty($loaded_appointment->id)) echo $loaded_appointment->id; ?>"/>
 					
 					<?php
+						$CUSTOMER_WIDGET_FIELD_LABEL = "Customer";
+						$CUSTOMER_WIDGET_CLOSEABLE = TRUE;
+						$CUSTOMER_WIDGET_LIST_HEIGHT = 200;
 						require("customerWidget.php");
 						
 					?>
