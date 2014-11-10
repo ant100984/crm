@@ -36,7 +36,7 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				$('.message').delay(5000).hide();
+				$('.outcome_message').delay(5000).slideUp("slow");
 			});
 		</script>
 			

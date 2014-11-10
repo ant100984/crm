@@ -57,12 +57,12 @@
 					echo "<td>".$customer->homeaddress."</td>";
 					echo "<td>".$customer->businessaddress."</td>";
 					echo "<td>".$customer->group_name."</td>";
-					echo "<td style='width: 200px;'>";
+					echo "<td style='width: 195px;'>";
 						echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Details</a>";
 						if($customer->enabled == 1){
-							echo "<a href='".base_url()."/index.php/customers/setCustomerEnabled/".$customer->id."/0' class='btn btn-xs btn-warning' role='button'><span class='glyphicon glyphicon-ban-circle'></span> Disable</a>";
+							echo "<a href='".base_url()."/index.php/customers/setCustomerEnabled/".$customer->id."/0' class='btn btn-xs btn-warning' role='button'><span class='fa fa-lock'></span> Disable</a>";
 						}else
-							echo "<a href='".base_url()."/index.php/customers/setCustomerEnabled/".$customer->id."/1' class='btn btn-xs btn-warning' role='button'><span class='glyphicon glyphicon-ban-circle'></span> Enable</a>";
+							echo "<a href='".base_url()."/index.php/customers/setCustomerEnabled/".$customer->id."/1' class='btn btn-xs btn-success' role='button'><span class='fa fa-unlock'></span> Enable</a>";
 							
 						echo "<a href='".base_url()."/index.php/customers/deleteCustomer/".$customer->id."' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
 					echo "</td>";

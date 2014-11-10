@@ -7,46 +7,12 @@
 			<div class="box-body">
 				<form method="post" action="<?php echo base_url(); echo "/index.php/appointments/saveAppointment"; ?>">
 					<input type="hidden" name="appointment_id" id="appointment_id" value="<?php if(!empty($loaded_appointment->id)) echo $loaded_appointment->id; ?>"/>
-					<div class="form-group">
-						<label>Customer</label>
-						<div class="input-group">
-							<div class="input-group-btn">
-								<button id="openChooseCustomer" type="button" class="btn btn-info btn-flat">
-									Choose&nbsp;
-									<i id="customer_dropdown_icon" class="fa fa-caret-down"></i>
-								</button>
-							</div>
-							<input readonly required id="customer_name" name="customer_name" type="text" class="form-control" value="<?php if(!empty($loaded_appointment->customer_id)) echo $loaded_appointment->firstname." ".$loaded_appointment->lastname; ?>">
-							<input id="customer_id" name="customer_id" type="hidden" value="<?php if(!empty($loaded_appointment->customer_id)) echo $loaded_appointment->customer_id; ?>">
-						</div>
-					</div>
-					<div id="customer_list" class="box box-solid box-info" style="display: none;">
-						<div class="box-header">
-							<h4 class="box-title">Select the customer</h4>
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-info btn-sm" id="close_customer_list"><i class="fa fa-times"></i></button>
-							</div>
-						</div><!-- /.box-header -->
-						<div class="box-body no-padding" style="min-height: 200px; max-height: 200px; overflow-y: visible;">
-							<div class="input-group">
-								<input class="form-control" type="text" value="" id="customer_filter" name="customer_filter" placeholder="Filter the customer list..."/>
-								<div class="input-group-addon">
-									<i class="fa fa-search"></i>
-								</div>
-							</div>
-							<div class="box">
-								<table id="customers_list_table" class="table table-hover table-condensed">
-									<?php
-										foreach($customers as $customer){
-											echo "<tr><td style='vertical-align: middle !important;'><img class='img-circle' src='".base_url().(!empty($customer->profilephoto) ? $customer->profilephoto : 'img/no_image.png')."' width='50'/></td><td style='vertical-align: middle !important;'><b>".$customer->firstname." ".$customer->lastname. "</b> born on <b>" . $customer->dateofbirth ."</b></td><td style='vertical-align: middle !important;'><a href='javascript:chooseCustomer(".$customer->id.",\"".$customer->firstname." ".$customer->lastname."\");' class='btn'><i class='fa fa-plus'></i></a></td></tr>";
-										}
-									?>
-								</table>
-								<div class="overlay customers_overlay" style="display: none;"></div>
-								<div class="loading-img customers_loading" style="display: none;"></div>
-							</div>
-						</div>
-					</div>
+					
+					<?php
+						require("customerWidget.php");
+						
+					?>
+					
 					<div class="form-group">
 						<label for="subject">Subject</label>
 						<input id="subject" required name="subject" type="text" class="form-control" value="<?php if(!empty($loaded_appointment->subject)) echo $loaded_appointment->subject; ?>">
@@ -190,69 +156,13 @@
 </div>
 
 <script type="text/javascript">
-	function chooseCustomer(id, name){
-		$('#customer_id').val(id);
-		$('#customer_name').val(name);
-		$('#customer_list').slideUp("fast");
-		$('.choose_customer_overlay').hide();
-	}
-	
-	function openChooseCustomer(){
-		$('#customer_list').slideDown("fast");
-		$('.choose_customer_overlay').show();
-	}
-	
-	function closeChooseCustomer(){
-		$('#customer_list').slideUp("fast");
-		$('.choose_customer_overlay').hide();
-	}
-	
-	
 	$(function() {
-		
-		$('#customer_filter').keyup(function(){
-			var val = $('#customer_filter').val();
-			
-			$.ajax({
-			  type: "POST",
-			  url: "<?php echo base_url() . "/index.php/customers/filterCustomers"; ?>",
-			  data: {filter_string: val},
-			  beforeSend: function(){
-				$('.customers_overlay').show();
-				$('.customers_loading').show();
-			  }
-			}).done(function(data) {
-				$('#customers_list_table').html(data);
-				$('.customers_overlay').hide();
-				$('.customers_loading').hide();
-			});
-			
-		});
 		
 		if('<?php if(!empty($loaded_remark->id)) echo "stuff"; ?>' != ''){
 		
 			$(".edit_remark_overlay").show();
 		
 		}
-		
-		
-		$('#customer_name').click(function(){
-			if($('#customer_list').is(':visible'))
-				closeChooseCustomer();
-			else
-				openChooseCustomer();
-		});
-		
-		$('#openChooseCustomer').click(function(){
-			if($('#customer_list').is(':visible'))
-				closeChooseCustomer();
-			else
-				openChooseCustomer();
-		});
-			
-		$('#close_customer_list').click(function(){
-			closeChooseCustomer();			
-		});
 		
 		$("#start_date").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 		$("#end_date").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});

@@ -76,7 +76,7 @@
 					<?php
 						if(!empty($error_messages))
 							foreach($error_messages as $error){
-								echo "<div class='row message'>";
+								echo "<div class='row outcome_message'>";
 									echo "<div class='col-md-6'>";
 										echo "<div class='alert alert-danger alert-dismissable'>";
 											echo "<i class='fa fa-ban'></i>";
@@ -91,7 +91,7 @@
 					<?php
 						if(!empty($success_messages))
 							foreach($success_messages as $message){
-								echo "<div class='row message'>";
+								echo "<div class='row outcome_message'>";
 									echo "<div class='col-md-6'>";
 										echo "<div class='alert alert-success alert-dismissable'>";
 											echo "<i class='fa fa-check'></i>";

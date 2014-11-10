@@ -9,7 +9,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('messages_model');
 		$this->load->helper('url');
 		
-		$messages = $this->messages_model->getMessages();
+		$messages = $this->messages_model->getMessages(FALSE,FALSE,'R',FALSE,'yes');
 		
 		$data['messages'] = $messages;
 		$data['num_messages'] = sizeof($messages);

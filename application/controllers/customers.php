@@ -50,7 +50,7 @@ class Customers extends MY_Controller {
 	
 		$data['customers'] = $this->users_model->filterCustomers($filter_string);
 		$this->load->vars($data);
-		$this->load->view('templates/customersListAjax');
+		$this->load->view('templates/customersTableContent');
 	
 	}
 	

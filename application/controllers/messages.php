@@ -7,6 +7,9 @@ class Messages extends MY_Controller {
 		parent::__construct();
 		$this->load->model('messages_model');
 		$this->load->model('groups_model');
+		$this->load->model('users_model');
+		$data['menu_active'] = "messaging";
+		$this->load->vars($data);
 		$this->load->helper('url');
 		
 	}
@@ -21,6 +24,9 @@ class Messages extends MY_Controller {
 		
 		$data['filter_group'] = $group;
 		$data['filter_direction'] = $direction;
+		
+		$data['instant_messages'] = $this->messages_model->getMessages();
+		$data['customers'] = $this->users_model->loadCustomers();
 		
 		$this->load->vars($data);
 		

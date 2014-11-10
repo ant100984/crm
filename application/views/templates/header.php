@@ -73,10 +73,10 @@
 											<li><!-- start message -->
 												<a href="#">
 													<div class="pull-left">
-														<img src="<?php echo base_url(); ?>img/avatar3.png" class="img-circle" alt="User Image"/>
+														<img src="<?php echo base_url().$message->sender_photo; ?>" class="img-circle" alt="User Image"/>
 													</div>
 													<h4>
-														<?php echo $message->firstname.' '.$message->lastname; ?>
+														<?php echo $message->sender_firstname.' '.$message->sender_lastname; ?>
 														<small><i class="fa fa-clock-o"></i><?php echo $message->datesent; ?></small>
 													</h4>
 													<p><?php echo $message->messagetext; ?></p>
@@ -87,7 +87,7 @@
 										?>
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
+                                <li class="footer"><a href="<?php echo base_url()."index.php/messages"; ?>">See All Messages</a></li>
                             </ul>
                         </li>
 						<!-- Notifications: style can be found in dropdown.less -->

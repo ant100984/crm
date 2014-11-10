@@ -94,8 +94,8 @@
 										echo "<td>".$customer->gender."</td>";
 										echo "<td>".$customer->homeaddress."</td>";
 										echo "<td>".$customer->businessaddress."</td>";
-										echo "<td>";
-											echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."' class='btn btn-xs btn-succes' role='button'><span class='glyphicon glyphicon-pencil'></span> Details</a>";
+										echo "<td style='width: 50px;'>";
+											echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Details</a>";
 										echo "</td>";
 									echo "</tr>";
 								}
