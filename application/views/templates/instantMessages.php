@@ -66,5 +66,3 @@
 	</div>
 	
 </div><!-- /.box (chat box) --> 
-<script type="text/javascript">
-</script>
