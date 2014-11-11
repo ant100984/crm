@@ -59,6 +59,31 @@
 		$('#customer_id').val(id);
 		$('#customer_name').val(name);
 		closeChooseCustomer();
+		
+		<?php if(!empty($CUSTOMER_WIDGET_UPDATE_MESSAGES_LIST)){ ?>
+		
+				filterMessages();
+		
+		<?php } ?>
+		
+	}
+	
+	function filterMessages(){
+		var val = $('#customer_id').val();
+		
+		$.ajax({
+		  type: "POST",
+		  url: "<?php echo base_url() . "/index.php/messages/filterMessages"; ?>",
+		  data: {user_id: val},
+		  beforeSend: function(){
+			$('.messages_overlay').show();
+			$('.messages_loading').show();
+		  }
+		}).done(function(data) {
+			$('#messages_list').html(data);
+			$('.messages_overlay').hide();
+			$('.messages_loading').hide();
+		});
 	}
 	
 	function openChooseCustomer(){

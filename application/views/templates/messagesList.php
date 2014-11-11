@@ -1,5 +1,5 @@
 <?php
-	if(sizeof($messages) == 0)
+	if(sizeof($instant_messages) == 0)
 		echo "<h5>No messages to show</h5>";
 		
 	foreach($instant_messages as $message){

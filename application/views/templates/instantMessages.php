@@ -34,7 +34,7 @@
 			</div>
 			<div class="box-body chat" id="chat-box"  style="max-height: 500px; min-height: 500px;">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-8 messages_list">
 						
 						<?php
 						
@@ -48,6 +48,7 @@
 							$CUSTOMER_WIDGET_BUTTON_LABEL = "Choose a customer&nbsp;";
 							$CUSTOMER_WIDGET_CLOSEABLE = FALSE;
 							$CUSTOMER_WIDGET_LIST_HEIGHT = 400;
+							$CUSTOMER_WIDGET_UPDATE_MESSAGES_LIST = TRUE;
 							require("customerWidget.php");
 							
 						?>
@@ -62,6 +63,8 @@
 					</div>
 				</div>
 			</div>
+			<div class="overlay messages_overlay" style="display: none;"></div>
+			<div class="loading-img messages_loading" style="display: none;"></div>
 		</div>
 	</div>
 	

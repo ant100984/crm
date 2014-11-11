@@ -12,6 +12,7 @@
 						$CUSTOMER_WIDGET_FIELD_LABEL = "Customer";
 						$CUSTOMER_WIDGET_CLOSEABLE = TRUE;
 						$CUSTOMER_WIDGET_LIST_HEIGHT = 200;
+						$CUSTOMER_WIDGET_UPDATE_MESSAGES_LIST = FALSE;
 						require("customerWidget.php");
 						
 					?>

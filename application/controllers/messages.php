@@ -36,5 +36,15 @@ class Messages extends MY_Controller {
 		$this->load->view('templates/footer');
 		
 	}
+	
+	public function filterMessages(){
+		$user_id = $this->input->post('user_id');
+		
+		$data['instant_messages'] = $this->messages_model->getMessages(!empty($user_id) ? $user_id : FALSE);
+		
+		$this->load->vars($data);
+		
+		$this->load->view('templates/messagesList');
+	}
 
 }
