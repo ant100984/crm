@@ -22,7 +22,9 @@
         <link href="<?php echo base_url();?>css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="<?php echo base_url();?>css/AdminLTE.css" rel="stylesheet" type="text/css" />
-		
+		<!-- CRM css -->
+		<link href="<?php echo base_url();?>css/main.css" rel="stylesheet" type="text/css" />
+			
 		<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.css" rel="stylesheet" type="text/css" />
         <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print' />
 		
@@ -37,6 +39,11 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
 		
+		<!-- waypoint plugin -->
+		<script src="<?php echo base_url();?>js/plugins/waypoints/waypoints.min.js" type="text/javascript"></script>
+		
+		<!-- CK editor -->
+		<script src="//cdn.ckeditor.com/4.4.5/full/ckeditor.js"></script>
     </head>
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->

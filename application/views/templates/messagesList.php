@@ -1,12 +1,12 @@
 <?php
 	if(sizeof($instant_messages) == 0)
 		echo "<h5>No messages to show</h5>";
-		
+	
 	foreach($instant_messages as $message){
-?>
-		<div class="item">
+?>		
+		<div message_id="<?php echo $message->id; ?>" class="<?php if($message->receiver_type == "crmuser" && $message->msg_read == 0) echo "unread_message"; ?> item" style="<?php if($message->sender_type != "crmuser") echo "padding-left:300px;"; ?>">
 			<?php 
-				echo "<img src='".base_url().$message->sender_photo."' alt='user image' class='online'/>";
+				echo "<img src='".base_url().$message->sender_photo."' alt='user image' class='".($message->sender_type != "crmuser" ? "offline" : "online")."'/>";
 			?>
 			<p class="message">
 				<?php 

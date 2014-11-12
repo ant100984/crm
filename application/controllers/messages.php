@@ -14,7 +14,7 @@ class Messages extends MY_Controller {
 		
 	}
 
-	public function index(){	
+	public function index($customer_id=FALSE){	
 		$data['location'] = "Instant messages";
 		
 		$group = $this->input->post('group');
@@ -25,8 +25,11 @@ class Messages extends MY_Controller {
 		$data['filter_group'] = $group;
 		$data['filter_direction'] = $direction;
 		
-		$data['instant_messages'] = $this->messages_model->getMessages();
+		$data['instant_messages'] = $this->messages_model->getMessages($customer_id);
 		$data['customers'] = $this->users_model->loadCustomers();
+		
+		if($customer_id !== FALSE)
+			$data['loaded_customer'] = $this->users_model->loadCustomers($customer_id);
 		
 		$this->load->vars($data);
 		
@@ -46,5 +49,19 @@ class Messages extends MY_Controller {
 		
 		$this->load->view('templates/messagesList');
 	}
-
+	
+	public function sendMessage(){
+		$customer_id = $this->input->post('customer_id');
+		$message_text = $this->input->post('message_text');
+		
+		$this->messages_model->insertMessage($message_text, 1, $customer_id);
+		
+		$this->index($customer_id);
+	}
+	
+	public function setMessageRead(){
+		$message_id = $this->input->post('message_id');	
+		
+		$this->messages_model->setMessageRead($message_id);
+	}
 }
