@@ -108,11 +108,26 @@ CREATE TABLE `messages` (
   `datesent` datetime DEFAULT NULL,
   `dateread` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 /*Data for the table `messages` */
 
-insert  into `messages`(`id`,`messagetext`,`sender`,`receiver`,`datesent`,`dateread`) values (1,'asdasdasd',23,1,'2014-10-22 17:19:04',NULL);
+insert  into `messages`(`id`,`messagetext`,`sender`,`receiver`,`datesent`,`dateread`) values (1,'asdasdasd',2,1,'2014-10-22 17:19:04','2014-11-13 04:54:24'),(2,'test',1,2,'2014-11-11 02:03:38',NULL),(3,'Welcome',1,3,'2014-11-12 15:40:44',NULL),(4,'',1,3,'2014-11-12 15:41:27',NULL),(5,'Hello',1,3,'2014-11-12 15:44:35',NULL),(6,'Are you there?',1,3,'2014-11-12 15:47:26',NULL),(7,'asdasd',1,3,'2014-11-12 15:47:42',NULL),(8,'i am waiting for your feedback',1,2,'2014-11-12 22:48:32',NULL),(9,'asdasd',1,2,'2014-11-12 22:52:06',NULL),(10,'asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh ',2,1,'2014-11-12 15:56:55','2014-11-13 04:54:24'),(11,'giesucri',1,2,'2014-11-12 22:57:57',NULL),(12,'Are you there?',1,3,'2014-11-12 23:04:57',NULL),(13,'how are you',1,3,'2014-11-12 23:05:08',NULL),(14,'ddd',1,3,'2014-11-12 23:05:13',NULL),(15,'asdasdasda',1,3,'2014-11-12 23:05:20',NULL),(16,'asdasdasda',1,3,'2014-11-12 23:40:41',NULL),(17,'asddasd',1,2,'2014-11-12 23:41:18',NULL),(18,'asdasd',1,2,'2014-11-12 23:41:22',NULL),(19,'asdasdas',1,2,'2014-11-12 23:41:25',NULL);
+
+/*Table structure for table `newsletter_templates` */
+
+DROP TABLE IF EXISTS `newsletter_templates`;
+
+CREATE TABLE `newsletter_templates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `body` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `newsletter_templates` */
+
+insert  into `newsletter_templates`(`id`,`title`,`body`) values (1,'Special Offer','231123123123');
 
 /*Table structure for table `policies` */
 
@@ -165,6 +180,19 @@ CREATE TABLE `policies_status` (
 
 insert  into `policies_status`(`id`,`code`,`description`) values (1,'PD','Paid'),(2,'UPD','Unpaid');
 
+/*Table structure for table `tmp_newsletter_attachments` */
+
+DROP TABLE IF EXISTS `tmp_newsletter_attachments`;
+
+CREATE TABLE `tmp_newsletter_attachments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `newsletter_id` int(11) DEFAULT NULL,
+  `filepath` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tmp_newsletter_attachments` */
+
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
@@ -191,11 +219,11 @@ CREATE TABLE `users` (
   `lastlogin` datetime DEFAULT NULL,
   `enabled` int(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`type`,`firstname`,`lastname`,`dateofbirth`,`gender`,`occupation`,`smoker`,`homeaddress`,`businessaddress`,`nric`,`notes`,`group`,`profilephoto`,`phone`,`email`,`username`,`password`,`lastlogin`,`enabled`) values (1,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(2,'customer','pippo','pippo','1979-06-04','M','Developer','Y','bbbbb','bbbbb','12345','aaa',9,'attachments/avatar2.png',NULL,'aaaaa',NULL,NULL,NULL,1);
+insert  into `users`(`id`,`type`,`firstname`,`lastname`,`dateofbirth`,`gender`,`occupation`,`smoker`,`homeaddress`,`businessaddress`,`nric`,`notes`,`group`,`profilephoto`,`phone`,`email`,`username`,`password`,`lastlogin`,`enabled`) values (1,'crmuser','System','',NULL,'','','N','','','','',NULL,'attachments/avatar.png',NULL,NULL,'admin',NULL,NULL,1),(2,'customer','pippo','pippo','1979-06-04','M','Developer','Y','bbbbb','bbbbb','12345','aaa',9,'attachments/avatar2.png',NULL,'aaaaa',NULL,NULL,NULL,1),(3,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(4,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(5,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(6,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(7,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(8,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(9,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(10,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(11,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(12,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(13,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(14,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(15,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(16,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(17,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(18,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(19,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(20,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(21,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(22,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(23,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(24,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(25,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(26,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(27,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(28,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(29,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(30,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1),(31,'customer','Antonio','Esposito','1979-06-04','M','Developer','N','I Trv. Giulio Cesare 11','Via Roma 236','123','asdasd',8,'attachments/avatar.png',NULL,'esp.antonio@gmail.com','aesposito','','2014-11-03 12:40:09',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
