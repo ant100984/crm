@@ -21,8 +21,9 @@
 		</div><!-- /. tools -->
 	</div><!-- /.box-header -->
 	<div class='box-body pad'>
-		<form>
-			<textarea id="newsletter_body" class="textarea" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+		<form role="form" action="" method="post">
+			<!-- style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" -->
+			<textarea id="newsletter_body" class="textarea"><?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->body; ?></textarea>
 		</form>
 	</div>
 </div>
@@ -34,13 +35,17 @@
 	<div class="box-body">
 		<table class="table table-bordered" style="margin-top:50px; width: 500px; margin-bottom: 20px;">
 			<tbody>
+			<?php foreach($attachments as $attachment){ ?>
 			  <tr>
-				<td>Message_to_the_customers.pdf</td>
+				<td><?php echo $attachment->filename; ?></td>
 				<td>
 					<a href="" class="btn btn-xs btn-neutral" role="button"><span class="glyphicon glyphicon-search"></span> View</a>
 					<a href="" class="btn btn-xs btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
 				</td>
 			  </tr>
+			<?php
+			}
+			?>
 			</tbody>
 		</table>
 		<a href="" class="btn btn-xs btn-success" role="button"><span class="glyphicon glyphicon-plus"></span>Attach file</a>

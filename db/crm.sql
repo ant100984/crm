@@ -110,6 +110,20 @@ CREATE TABLE `messages` (
 
 insert  into `messages`(`id`,`messagetext`,`sender`,`receiver`,`datesent`,`dateread`) values (1,'asdasdasd',2,1,'2014-10-22 17:19:04','2014-11-13 04:54:24'),(2,'test',1,2,'2014-11-11 02:03:38',NULL),(3,'Welcome',1,3,'2014-11-12 15:40:44',NULL),(4,'',1,3,'2014-11-12 15:41:27',NULL),(5,'Hello',1,3,'2014-11-12 15:44:35',NULL),(6,'Are you there?',1,3,'2014-11-12 15:47:26',NULL),(7,'asdasd',1,3,'2014-11-12 15:47:42',NULL),(8,'i am waiting for your feedback',1,2,'2014-11-12 22:48:32',NULL),(9,'asdasd',1,2,'2014-11-12 22:52:06',NULL),(10,'asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh ',2,1,'2014-11-12 15:56:55','2014-11-13 04:54:24'),(11,'giesucri',1,2,'2014-11-12 22:57:57',NULL),(12,'Are you there?',1,3,'2014-11-12 23:04:57',NULL),(13,'how are you',1,3,'2014-11-12 23:05:08',NULL),(14,'ddd',1,3,'2014-11-12 23:05:13',NULL),(15,'asdasdasda',1,3,'2014-11-12 23:05:20',NULL),(16,'asdasdasda',1,3,'2014-11-12 23:40:41',NULL),(17,'asddasd',1,2,'2014-11-12 23:41:18',NULL),(18,'asdasd',1,2,'2014-11-12 23:41:22',NULL),(19,'asdasdas',1,2,'2014-11-12 23:41:25',NULL);
 
+/*Table structure for table `newsletter_attachments` */
+
+DROP TABLE IF EXISTS `newsletter_attachments`;
+
+CREATE TABLE `newsletter_attachments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `newsletter_id` int(11) DEFAULT NULL,
+  `filepath` varchar(255) DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `newsletter_attachments` */
+
 /*Table structure for table `newsletter_customer` */
 
 DROP TABLE IF EXISTS `newsletter_customer`;
@@ -205,18 +219,20 @@ CREATE TABLE `policies_status` (
 
 insert  into `policies_status`(`id`,`code`,`description`) values (1,'PD','Paid'),(2,'UPD','Unpaid');
 
-/*Table structure for table `tmp_newsletter_attachments` */
+/*Table structure for table `user_permissions` */
 
-DROP TABLE IF EXISTS `tmp_newsletter_attachments`;
+DROP TABLE IF EXISTS `user_permissions`;
 
-CREATE TABLE `tmp_newsletter_attachments` (
+CREATE TABLE `user_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `newsletter_id` int(11) DEFAULT NULL,
-  `filepath` varchar(255) DEFAULT NULL,
+  `user` int(11) DEFAULT NULL,
+  `permission` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
-/*Data for the table `tmp_newsletter_attachments` */
+/*Data for the table `user_permissions` */
+
+insert  into `user_permissions`(`id`,`user`,`permission`) values (1,1,'dashboard'),(2,1,'calendar'),(3,1,'policiesoverview'),(4,1,'adminmenu'),(5,1,'createcustomer'),(6,1,'customerlist'),(7,1,'groups'),(8,1,'instantmessages'),(9,1,'newsletters');
 
 /*Table structure for table `users` */
 
