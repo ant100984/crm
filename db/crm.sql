@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.5.13 : Database - crm
+SQLyog Ultimate v11.5 (64 bit)
+MySQL - 5.6.14 : Database - crm
 *********************************************************************
 */
 
@@ -12,10 +12,6 @@ MySQL - 5.5.13 : Database - crm
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`crm` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `crm`;
-
 /*Table structure for table `appointments` */
 
 DROP TABLE IF EXISTS `appointments`;
@@ -114,6 +110,21 @@ CREATE TABLE `messages` (
 
 insert  into `messages`(`id`,`messagetext`,`sender`,`receiver`,`datesent`,`dateread`) values (1,'asdasdasd',2,1,'2014-10-22 17:19:04','2014-11-13 04:54:24'),(2,'test',1,2,'2014-11-11 02:03:38',NULL),(3,'Welcome',1,3,'2014-11-12 15:40:44',NULL),(4,'',1,3,'2014-11-12 15:41:27',NULL),(5,'Hello',1,3,'2014-11-12 15:44:35',NULL),(6,'Are you there?',1,3,'2014-11-12 15:47:26',NULL),(7,'asdasd',1,3,'2014-11-12 15:47:42',NULL),(8,'i am waiting for your feedback',1,2,'2014-11-12 22:48:32',NULL),(9,'asdasd',1,2,'2014-11-12 22:52:06',NULL),(10,'asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh ',2,1,'2014-11-12 15:56:55','2014-11-13 04:54:24'),(11,'giesucri',1,2,'2014-11-12 22:57:57',NULL),(12,'Are you there?',1,3,'2014-11-12 23:04:57',NULL),(13,'how are you',1,3,'2014-11-12 23:05:08',NULL),(14,'ddd',1,3,'2014-11-12 23:05:13',NULL),(15,'asdasdasda',1,3,'2014-11-12 23:05:20',NULL),(16,'asdasdasda',1,3,'2014-11-12 23:40:41',NULL),(17,'asddasd',1,2,'2014-11-12 23:41:18',NULL),(18,'asdasd',1,2,'2014-11-12 23:41:22',NULL),(19,'asdasdas',1,2,'2014-11-12 23:41:25',NULL);
 
+/*Table structure for table `newsletter_customer` */
+
+DROP TABLE IF EXISTS `newsletter_customer`;
+
+CREATE TABLE `newsletter_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `newsletter` int(11) DEFAULT NULL,
+  `customer` int(11) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  `dtmsent` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `newsletter_customer` */
+
 /*Table structure for table `newsletter_templates` */
 
 DROP TABLE IF EXISTS `newsletter_templates`;
@@ -128,6 +139,20 @@ CREATE TABLE `newsletter_templates` (
 /*Data for the table `newsletter_templates` */
 
 insert  into `newsletter_templates`(`id`,`title`,`body`) values (1,'Special Offer','231123123123');
+
+/*Table structure for table `newsletters` */
+
+DROP TABLE IF EXISTS `newsletters`;
+
+CREATE TABLE `newsletters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `template_id` int(11) DEFAULT NULL,
+  `body` text,
+  `dtmsent` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `newsletters` */
 
 /*Table structure for table `policies` */
 
