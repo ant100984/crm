@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.5 (64 bit)
-MySQL - 5.6.14 : Database - crm
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.5.13 : Database - crm
 *********************************************************************
 */
 
@@ -12,6 +12,10 @@ MySQL - 5.6.14 : Database - crm
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`crm` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `crm`;
+
 /*Table structure for table `appointments` */
 
 DROP TABLE IF EXISTS `appointments`;
@@ -162,11 +166,14 @@ CREATE TABLE `newsletters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `template_id` int(11) DEFAULT NULL,
   `body` text,
+  `status` varchar(10) DEFAULT NULL,
   `dtmsent` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `newsletters` */
+
+insert  into `newsletters`(`id`,`template_id`,`body`,`status`,`dtmsent`) values (1,NULL,NULL,'draft',NULL),(2,NULL,NULL,'draft',NULL),(3,NULL,NULL,'draft',NULL),(4,NULL,NULL,'draft',NULL),(5,NULL,NULL,'draft',NULL),(6,NULL,NULL,'draft',NULL),(7,NULL,NULL,'draft',NULL),(8,NULL,NULL,'draft',NULL);
 
 /*Table structure for table `policies` */
 

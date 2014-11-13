@@ -13,10 +13,22 @@ class Newsletter extends MY_Controller {
 	}
 
 	public function index(){
-		$data['location'] = "Newsletter";
+		$data['location'] = "Newsletters";
 		
-		$data['newsletter_id'] = $this->newsletter_model->getNewId();
+		$this->load->vars($data);
+		
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu');
+		$this->load->view('templates/footer');
+		
+	}
+	
+	public function createNewsletter(){
+		$data['location'] = "Create Newsletter";
+		
+		$data['newsletter_id'] = $this->newsletter_model->createDraftNewsletter();
 		$data['templates'] = $this->newsletter_model->getTemplates();
+		$data['attachments'] = Array();
 		
 		$this->load->vars($data);
 		
@@ -24,7 +36,6 @@ class Newsletter extends MY_Controller {
 		$this->load->view('templates/menu');
 		$this->load->view('templates/newsletter');
 		$this->load->view('templates/footer');
-		
 	}
 	
 }

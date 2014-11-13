@@ -17,11 +17,10 @@ class Newsletter_model extends CI_Model {
 	
 	}
 	
-	public function getNewId(){
-		$this->db->select_max('newsletter_id');
-		$query = $this->db->get('tmp_newsletter_attachments');
-		$row = $query->row();
-		return $row->newsletter_id + 1;
+	public function createDraftNewsletter(){
+		$data = array("status" => "draft");
+		$this->db->insert("newsletters",$data);
+		return $this->db->insert_id();
 	}
 	
 }
