@@ -5,7 +5,7 @@
 				<h3 class="box-title">Appointment details</h3>
 			</div>
 			<div class="box-body">
-				<form method="post" action="<?php echo base_url(); echo "/index.php/appointments/saveAppointment"; ?>">
+				<form method="post" action="<?php echo base_url() . "/index.php/appointments/saveAppointment"; ?>">
 					<input type="hidden" name="appointment_id" id="appointment_id" value="<?php if(!empty($loaded_appointment->id)) echo $loaded_appointment->id; ?>"/>
 					
 					<?php

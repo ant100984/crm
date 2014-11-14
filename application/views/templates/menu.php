@@ -39,7 +39,7 @@
 					</a>
 					<ul class="treeview-menu">
 						<li><a href="<?php echo base_url();?>index.php/messages"><i class="fa fa-angle-double-right"></i> Instant Messages</a></li>
-						<li><a href="<?php echo base_url();?>index.php/newsletter/createNewsletter"><i class="fa fa-angle-double-right"></i>Create Newsletter</a></li>
+						<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Create Newsletter</a></li>
 						<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Newsletters List</a></li>
 					</ul>
 				</li>

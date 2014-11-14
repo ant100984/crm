@@ -1,11 +1,17 @@
-<form role="form" action="" method="post">
+<form role="form" action="<?php echo base_url() . "/index.php/newsletter/saveNewsletter"; ?>" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="newsletter_id" name="newsletter_id" value="<?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->id; ?>"/>
 	<div class="box-body">
 		<div class="form-group">
-			<label for="member">Templates</label>
-			<select name="member" class="form-control">
+			<div class="box-body">
+				<input type="submit" class="btn btn-warning" value="SEND"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="template">Templates</label>
+			<select name="template" id="template" class="form-control">
 				<option value="" ></option>
 				<?php foreach($templates as $template){
-					echo "<option value='".$template->id."'>".$template->title."</option>";
+					echo "<option ".((!empty($loaded_newsletter) && $loaded_newsletter->template_id == $template->id) ? "selected" : "")." value='".$template->id."'>".$template->title."</option>";
 				}
 				?>
 			</select>
@@ -23,7 +29,10 @@
 		</div><!-- /.box-header -->
 		<div class='box-body pad'>
 			<!-- style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" -->
-			<textarea id="newsletter_body" class="textarea"><?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->body; ?></textarea>
+			<textarea name="newsletter_body" id="newsletter_body" class="textarea"><?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->body; ?></textarea>
+		</div>
+		<div class="box-body">
+			<input id="save" name="save" type="submit" class="btn btn-success" value="SAVE"/>
 		</div>
 	</div>
 	<div class="box">
@@ -35,21 +44,23 @@
 			<table class="table table-bordered" style="margin-top:50px; width: 500px; margin-bottom: 20px;">
 				<tbody>
 				<?php 
-				foreach($attachments as $attachment){ ?>
-				  <tr>
-					<td><?php echo $attachment->filename; ?></td>
-					<td>
-						<a href="" class="btn btn-xs btn-neutral" role="button"><span class="glyphicon glyphicon-search"></span> View</a>
-						<a href="" class="btn btn-xs btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-					</td>
-				  </tr>
+				if(isset($attachments)){
+					foreach($attachments as $attachment){ ?>
+					  <tr>
+						<td><?php echo $attachment->filename; ?></td>
+						<td>
+							<a href="" class="btn btn-xs btn-neutral" role="button"><span class="glyphicon glyphicon-search"></span> View</a>
+							<a href="<?php echo base_url() . "/index.php/newsletter/deleteAttachment/".$attachment->id."/".$attachment->newsletter_id; ?>" class="btn btn-xs btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+						</td>
+					  </tr>
 				<?php
+					}
 				}
 				?>
 				</tbody>
 			</table>
 			<input type="file" name="attachment" id="attachment" style="display: inline;"/>
-			<input type="submit" class="btn btn-xs btn-success" value="Upload"/>
+			<input id="upload" name="upload" type="submit" class="btn btn-success" value="UPLOAD"/>
 		</div>
 	</div>
 	<div class='box'>
@@ -124,16 +135,12 @@
 			  </table>
 		</div><!-- /.box-body -->
 	</div>
-	<div class="box-body">
-		<button class="btn btn-success btn-lg">SEND</button>
-	</div>
 </form>
 
 <script type="text/javascript">
 	
 	$(function() {
-		// Replace the <textarea id="editor1"> with a CKEditor
-		// instance, using default configuration.
+		
 		CKEDITOR.replace('newsletter_body');
 		
 	});
