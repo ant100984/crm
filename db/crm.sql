@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.5.13 : Database - crm
+SQLyog Ultimate v11.5 (64 bit)
+MySQL - 5.6.14 : Database - crm
 *********************************************************************
 */
 
@@ -12,10 +12,6 @@ MySQL - 5.5.13 : Database - crm
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`crm` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `crm`;
-
 /*Table structure for table `appointments` */
 
 DROP TABLE IF EXISTS `appointments`;
@@ -124,9 +120,11 @@ CREATE TABLE `newsletter_attachments` (
   `filepath` varchar(255) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `newsletter_attachments` */
+
+insert  into `newsletter_attachments`(`id`,`newsletter_id`,`filepath`,`filename`) values (1,26,'attachments/',NULL),(2,32,'attachments/apple-logo.gif','apple-logo.gif'),(3,34,'attachments/apple-logo.gif','apple-logo.gif');
 
 /*Table structure for table `newsletter_customer` */
 
@@ -167,13 +165,14 @@ CREATE TABLE `newsletters` (
   `template_id` int(11) DEFAULT NULL,
   `body` text,
   `status` varchar(10) DEFAULT NULL,
+  `dtmcreated` datetime DEFAULT NULL,
   `dtmsent` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 /*Data for the table `newsletters` */
 
-insert  into `newsletters`(`id`,`template_id`,`body`,`status`,`dtmsent`) values (1,NULL,NULL,'draft',NULL),(2,NULL,NULL,'draft',NULL),(3,NULL,NULL,'draft',NULL),(4,NULL,NULL,'draft',NULL),(5,NULL,NULL,'draft',NULL),(6,NULL,NULL,'draft',NULL),(7,NULL,NULL,'draft',NULL),(8,NULL,NULL,'draft',NULL);
+insert  into `newsletters`(`id`,`template_id`,`body`,`status`,`dtmcreated`,`dtmsent`) values (18,1,'<p>aaaaa</p>\r\n','DRAFT','2014-11-14 14:39:52',NULL),(19,1,'<p>asdasdasd</p>\r\n','DRAFT','2014-11-14 14:43:09',NULL),(20,1,'<p>asdasdasd</p>\r\n','DRAFT','2014-11-14 14:43:24',NULL),(21,1,'<p>asdasdasd</p>\r\n','DRAFT','2014-11-14 14:43:38',NULL),(22,1,'<p>asdasdasd</p>\r\n','DRAFT','2014-11-14 14:45:01',NULL),(23,1,'<p>asdasdasd</p>\r\n','DRAFT','2014-11-14 14:47:30',NULL),(24,1,'<p>asdasdasdas</p>\r\n','DRAFT','2014-11-14 14:49:21',NULL),(25,1,'<p>asdasdasdas</p>\r\n','DRAFT','2014-11-14 14:56:47',NULL),(26,1,'<p>alksdjaksdjkasdj</p>\r\n','DRAFT','2014-11-14 15:05:40',NULL),(27,1,'<p>asdasdasdasd</p>\r\n','DRAFT','2014-11-14 15:07:08',NULL),(28,1,'','DRAFT','2014-11-14 15:13:46',NULL),(29,1,'<p>123456</p>\r\n','DRAFT','2014-11-14 15:15:50',NULL),(30,1,'<p>12345</p>\r\n','DRAFT','2014-11-14 15:17:39',NULL),(31,1,'<p>324677 hhh</p>\r\n','DRAFT','2014-11-14 15:18:26',NULL),(32,1,'','DRAFT','2014-11-14 15:20:03',NULL),(33,1,'<p>aaaaa</p>\r\n','DRAFT','2014-11-14 15:36:28',NULL),(34,1,'<p>aaaaa</p>\r\n','DRAFT','2014-11-14 15:37:12',NULL),(35,0,'0','DRAFT','2014-11-14 15:37:15',NULL),(36,1,'<p>aaa</p>\r\n','DRAFT','2014-11-14 16:54:37',NULL);
 
 /*Table structure for table `policies` */
 
