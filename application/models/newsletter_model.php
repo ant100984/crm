@@ -71,4 +71,24 @@ class Newsletter_model extends CI_Model {
 		$this->db->delete('newsletter_attachments', array('id' => $attachment_id)); 
 	}
 	
+	public function addCustomers($newsletter_id, $customers){
+		foreach($customers as $customer_id){
+			
+			$this->db->where('customer', $customer_id);
+			$this->db->where('newsletter', $newsletter_id);
+			$this->db->from('newsletter_customer');
+			$count = $this->db->count_all_results();
+			
+			if($count == 0){
+				$data = array(
+					'customer' => $customer_id,
+					'newsletter' => $newsletter_id,
+					'status' => 'NOT_SENT'
+				);
+				
+				$this->insert('newsletter_customer',$data);
+			}	
+			
+		}
+	}
 }	

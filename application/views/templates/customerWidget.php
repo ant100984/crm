@@ -35,14 +35,14 @@
 		}
 		?>
 	</div><!-- /.box-header -->
-	<div class="box-body no-padding" style="min-height: <?php if(empty($CUSTOMER_WIDGET_LIST_HEIGHT)) echo "200px;"; else echo $CUSTOMER_WIDGET_LIST_HEIGHT."px;"; ?> max-height: <?php if(empty($CUSTOMER_WIDGET_LIST_HEIGHT)) echo "200px;"; else echo $CUSTOMER_WIDGET_LIST_HEIGHT."px;"; ?> overflow-y: auto;">
+	<div class="box-body no-padding">
 		<div class="input-group">
 			<input class="form-control" type="text" value="" id="customer_filter" name="customer_filter" placeholder="Filter the customer list..."/>
 			<div class="input-group-addon">
 				<i class="fa fa-search"></i>
 			</div>
 		</div>
-		<div class="box">
+		<div class="box" style="min-height: <?php if(empty($CUSTOMER_WIDGET_LIST_HEIGHT)) echo "200px;"; else echo $CUSTOMER_WIDGET_LIST_HEIGHT."px;"; ?> max-height: <?php if(empty($CUSTOMER_WIDGET_LIST_HEIGHT)) echo "200px;"; else echo $CUSTOMER_WIDGET_LIST_HEIGHT."px;"; ?> overflow-y: auto;">
 			<table id="customers_list_table" class="table table-hover table-condensed">
 				<?php
 					require("customersTableContent.php");

@@ -6,6 +6,8 @@ class Newsletter extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->model('newsletter_model');
+		$this->load->model('users_model');
+		$this->load->model('groups_model');
 		$this->load->helper('url');
 		$this->load->helper('date');
 		$data['menu_active'] = "messaging";
@@ -21,6 +23,26 @@ class Newsletter extends MY_Controller {
 		}
 		
 		$data['templates'] = $this->newsletter_model->getTemplates();
+		
+		$firstname = $this->input->post('firstname');
+		$lastname = $this->input->post('lastname'); 
+		$gender = $this->input->post('gender');
+		$group = $this->input->post('group');
+		$smoker = $this->input->post('smoker');
+		
+		$data['customers'] = $this->users_model->loadCustomers(FALSE, empty($firstname) ? FALSE : $firstname, empty($lastname) ? FALSE : $lastname, empty($gender) ? FALSE : $gender, empty($group) ? FALSE : $group, empty($smoker) ? FALSE : $smoker);
+		$data['groups'] = $this->groups_model->getGroups();
+		$data['filter_firstname'] = $firstname;
+		$data['filter_lastname'] = $lastname;
+		$data['filter_gender'] = $gender;
+		$data['filter_group'] = $group;
+		$data['filter_smoker'] = $smoker;
+		
+		/* customers list option */
+		$data['ACTION_BUTTONS'] = false;
+		$data['CUSTOMERS_SELECTABLE'] = true;
+		$data['AJAX_FILTER'] = true;
+		/* end */
 		
 		$this->load->vars($data);
 		
@@ -73,5 +95,13 @@ class Newsletter extends MY_Controller {
 		$data['success_messages'][] = "Operation successfully completed";
 		$this->load->vars($data);
 		$this->index($newsletter_id);
+	}
+	
+	public function addCustomers(){
+		$newsletter_id = $this->input->post('newsletter_id');
+		$customers = $this->input->post('customers');
+		
+		$this->newsletter_model->addCustomers($newsletter_id, $customers);
+		
 	}
 }

@@ -71,6 +71,10 @@ class Customers extends MY_Controller {
 		$data['filter_group'] = $group;
 		$data['filter_smoker'] = $smoker;
 		
+		$data['ACTION_BUTTONS'] = true;
+		$data['CUSTOMERS_SELECTABLE'] = false;
+		$data['AJAX_FILTER'] = false;
+		
 		$this->load->vars($data);
 		
 		$this->load->view('templates/header');
@@ -78,6 +82,32 @@ class Customers extends MY_Controller {
 		$this->load->view('templates/customersList');
 		
 		$this->load->view('templates/footer');
+	}
+	
+	public function ajaxList(){	
+		$firstname = $this->input->post('firstname');
+		$lastname = $this->input->post('lastname'); 
+		$gender = $this->input->post('gender');
+		$group = $this->input->post('group');
+		$smoker = $this->input->post('smoker');
+		
+		error_log($firstname." ".$lastname." ".$gender." ".$group." ".$smoker);
+		
+		$data['customers'] = $this->users_model->loadCustomers(FALSE, empty($firstname) ? FALSE : $firstname, empty($lastname) ? FALSE : $lastname, empty($gender) ? FALSE : $gender, empty($group) ? FALSE : $group, empty($smoker) ? FALSE : $smoker);
+		$data['groups'] = $this->groups_model->getGroups();
+		$data['filter_firstname'] = $firstname;
+		$data['filter_lastname'] = $lastname;
+		$data['filter_gender'] = $gender;
+		$data['filter_group'] = $group;
+		$data['filter_smoker'] = $smoker;
+		
+		$data['ACTION_BUTTONS'] = false;
+		$data['CUSTOMERS_SELECTABLE'] = true;
+		$data['AJAX_FILTER'] = true;
+		
+		$this->load->vars($data);
+		
+		$this->load->view('templates/customersList');
 	}
 	
 	public function setCustomerEnabled($customer, $enabled){
