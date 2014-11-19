@@ -8,19 +8,22 @@ class MY_Controller extends CI_Controller {
 		parent::__construct();
 		$this->load->model('messages_model');
 		$this->load->helper('url');
+		$this->load->library('session');
 		
 		$messages = $this->messages_model->getMessages(FALSE,FALSE,'R',FALSE,'yes');
 		
 		$data['messages'] = $messages;
 		$data['num_messages'] = sizeof($messages);
 		
-		/* To be removed */
+		$username = $this->session->userdata('username');
 		
-		$data['username'] = 'Admin';
-		
-		/* end */
+		if(!empty($username)) $data['username'] = 'Admin';
 		
 		$this->load->vars($data);
+		
+		if(empty($username)){
+			redirect('notlogged');
+		}
 		
 	}
 

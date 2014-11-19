@@ -61,7 +61,7 @@ class Newsletter extends MY_Controller {
 		
 		$upload = $this->input->post('upload');
 		
-		$newsletter_id = $this->newsletter_model->saveNewsletter(empty($newsletter_id) ? FALSE : $newsletter_id, $template_id, $newsletter_body);
+		$newsletter_id = $this->newsletter_model->saveNewsletter(empty($newsletter_id) ? FALSE : $newsletter_id, empty($template_id) ? FALSE : $template_id, $newsletter_body);
 		
 		$template_title = $this->input->post('template_title');
 		$save_as_template = $this->input->post('save_as_template');

@@ -31,7 +31,7 @@ class Newsletter_model extends CI_Model {
 		
 		$data = array(
 			"dtmcreated" => date("Y-m-d H:i:s"),
-			"template_id" => $template_id,
+			"template_id" => $template_id === FALSE ? null : $template_id,
 			"body" => $newsletter_body,
 			"status" => "DRAFT"
 		);
