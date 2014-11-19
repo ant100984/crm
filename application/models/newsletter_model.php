@@ -72,6 +72,7 @@ class Newsletter_model extends CI_Model {
 	}
 	
 	public function addCustomers($newsletter_id, $customers){
+		
 		foreach($customers as $customer_id){
 			
 			$this->db->where('customer', $customer_id);
@@ -86,9 +87,32 @@ class Newsletter_model extends CI_Model {
 					'status' => 'NOT_SENT'
 				);
 				
-				$this->insert('newsletter_customer',$data);
+				$this->db->insert('newsletter_customer',$data);
 			}	
 			
 		}
+	}
+	
+	public function getNewsletterCustomers($newsletter_id){
+		$this->db->select('nc.id, nc.newsletter, nc.customer, nc.status, u.firstname, u.lastname', FALSE);
+		$this->db->join('users u','u.id=nc.customer');
+		$this->db->from('newsletter_customer nc');
+		$this->db->where('nc.newsletter', $newsletter_id);
+		
+		$query = $this->db->get();
+		
+		return $query->result();
+	}
+	
+	public function deleteCustomerNewsletter($id){
+		$this->db->delete('newsletter_customer', array('id' => $id)); 
+	}
+	
+	public function saveBodyAsTemplate($template_title,$newsletter_body){
+		$data = array(
+			'title' => $template_title,
+			'body' => $newsletter_body);
+			
+		$this->db->insert("newsletter_templates", $data);
 	}
 }	

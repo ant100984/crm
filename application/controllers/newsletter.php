@@ -20,6 +20,7 @@ class Newsletter extends MY_Controller {
 		if($newsletter_id !== FALSE){
 			$data['loaded_newsletter'] = $this->newsletter_model->getNewsletter($newsletter_id);
 			$data['attachments'] = $this->newsletter_model->getAttachments($newsletter_id);
+			$data['newsletter_customers'] = $this->newsletter_model->getNewsletterCustomers($newsletter_id);
 		}
 		
 		$data['templates'] = $this->newsletter_model->getTemplates();
@@ -62,6 +63,13 @@ class Newsletter extends MY_Controller {
 		
 		$newsletter_id = $this->newsletter_model->saveNewsletter(empty($newsletter_id) ? FALSE : $newsletter_id, $template_id, $newsletter_body);
 		
+		$template_title = $this->input->post('template_title');
+		$save_as_template = $this->input->post('save_as_template');
+		
+		if(!empty($save_as_template)){
+			$this->newsletter_model->saveBodyAsTemplate($template_title,$newsletter_body);
+		}
+		
 		if(!empty($upload)){
 			if(!empty($_FILES['attachment']['name'])) {
 		
@@ -98,10 +106,23 @@ class Newsletter extends MY_Controller {
 	}
 	
 	public function addCustomers(){
-		$newsletter_id = $this->input->post('newsletter_id');
+		$newsletter_id = $this->input->post('newsletter');
 		$customers = $this->input->post('customers');
 		
 		$this->newsletter_model->addCustomers($newsletter_id, $customers);
+		
+		$data['newsletter_customers'] = $this->newsletter_model->getNewsletterCustomers($newsletter_id);
+		
+		$this->load->vars($data);
+		
+		$this->load->view('templates/selectedCustomers.php');
+		
+	}
+	
+	public function deleteCustomerNewsletter($id,$newsletter_id){
+		
+		$this->newsletter_model->deleteCustomerNewsletter($id);
+		$this->index($newsletter_id);
 		
 	}
 }
