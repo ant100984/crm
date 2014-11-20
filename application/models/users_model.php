@@ -131,4 +131,18 @@ class Users_model extends CI_Model {
 	public function deleteAttachment($id){
 		$this->db->delete('attachments', array('id' => $id)); 
 	}
+	
+	public function checkLogin($username,$password){
+		$this->db->select('*');
+		$this->db->from('users u');
+		$this->db->where('u.username',$username);
+		$this->db->where('u.password',md5($password));
+		
+		$query = $this->db->get();
+		
+		if($query->num_rows() > 0)
+			return $query->row();
+		else
+			return FALSE;
+	}
 }

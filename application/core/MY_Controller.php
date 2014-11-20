@@ -17,7 +17,7 @@ class MY_Controller extends CI_Controller {
 		
 		$username = $this->session->userdata('username');
 		
-		if(!empty($username)) $data['username'] = 'Admin';
+		if(!empty($username)) $data['username'] = $username;
 		
 		$this->load->vars($data);
 		
