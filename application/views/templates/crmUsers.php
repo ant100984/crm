@@ -11,8 +11,20 @@
 					<label for="logo">Profile photo</label>
 				</div>
 			    <img style="margin-bottom: 20px;" src="<?php echo base_url(); if(!empty($user->profilephoto)) echo $user->profilephoto; else echo "img/no_image.png";?>" width="100" height="100"/>
-			    <input type="file" class="form-control" id="logo" name="logo" placeholder="" value="">
+			    <input type="file" class="form-control" id="profile_photo" name="profile_photo" placeholder="" value="">
 			  
+				<div class="form-group">
+					<label for="firstname">Firstname</label>
+					<input type="text" class="form-control" id="firstname" name="firstname" placeholder="" required value="">
+				</div>
+				<div class="form-group">
+					<label for="lastname">Lastname</label>
+					<input type="text" class="form-control" id="lastname" name="lastname" placeholder="" required value="">
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="text" class="form-control" id="email" name="email" placeholder="" required value="">
+				</div>
 				<div class="form-group">
 					<label for="username">Username</label>
 					<input type="text" class="form-control" id="username" name="username" placeholder="" required value="">
@@ -66,8 +78,8 @@
 				<?php 
 					foreach($users as $user){ 
 						echo "<tr>";
-						echo "<td style='width: 75%;'>".$user->firstname . " " . $user->lastname ."</td>";
-						echo "<td style='width: 25%;'>";
+						echo "<td style='width: 70%;'>".$user->firstname . " " . $user->lastname ."</td>";
+						echo "<td style='width: 30%;'>";
 						echo "<a href='' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Edit</a>";
 						echo "<a href='' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
 						echo "</td>";

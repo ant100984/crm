@@ -10,9 +10,9 @@ class Users_model extends CI_Model {
 		return $this->loadUsers($user,$firstname,$lastname,$gender,$group,$smoker, "customer");
 	}
 	
-	public function loadUsers($user=FALSE,$firstname=FALSE,$lastname=FALSE,$gender=FALSE,$group=FALSE,$smoker=FALSE,$type){
+	public function loadUsers($user=FALSE,$firstname=FALSE,$lastname=FALSE,$gender=FALSE,$group=FALSE,$smoker=FALSE,$type,$admin=FALSE){
 	
-		$this->db->select("u.id, u.firstname, u.lastname, date_format(u.dateofbirth,'%d/%m/%Y') as dateofbirth, u.profilephoto, u.gender, u.occupation, u.smoker, u.email, u.homeaddress, u.businessaddress, u.nric, u.notes, u.enabled, g.group_name, u.`group`", FALSE);
+		$this->db->select("u.id, u.firstname, u.lastname, u.username, date_format(u.dateofbirth,'%d/%m/%Y') as dateofbirth, u.profilephoto, u.gender, u.occupation, u.smoker, u.email, u.homeaddress, u.businessaddress, u.nric, u.notes, u.enabled, g.group_name, u.`group`", FALSE);
 		$this->db->from("users u");
 		$this->db->join("groups g","g.id = u.`group`","left");
 		
@@ -21,6 +21,11 @@ class Users_model extends CI_Model {
 			$query = $this->db->get();
 			return $query->row();
 		}else{
+			
+			if($admin !== FALSE)
+				$this->db->where("u.isAdmin = {$admin}");
+			else
+				$this->db->where("u.isAdmin = 0");
 			
 			if($firstname !== FALSE)
 				$this->db->where("u.firstname LIKE '%{$firstname}%'");
@@ -85,11 +90,11 @@ class Users_model extends CI_Model {
 	
 	}
 	
-	public function saveCustomer($profile_photo=FALSE, $customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes){
+	public function saveCustomer($profile_photo=FALSE, $customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,$username,$password){
 		return $this->saveUser($profile_photo,$customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,"customer");
 	}
 	
-	public function saveUser($profile_photo=FALSE, $customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,$type){
+	public function saveUser($profile_photo=FALSE, $customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,$type,$username,$password){
 		
 		$data = array(
 			'dateofbirth' => $dob,
@@ -104,16 +109,22 @@ class Users_model extends CI_Model {
 			'businessaddress' => $business_address,
 			'nric' => $nric,
 			'notes' => $notes,
-			'type' => $type
+			'type' => $type,
+			'username' => $username
 		);
+		
+		if(!empty($password))
+			$data['password'] = md5($password);
 		
 		if($profile_photo !== FALSE) $data['profilephoto'] = $profile_photo;
 		
 		if(!empty($customer_id)){
 			$this->db->where('id', $customer_id);
 			$this->db->update('users', $data); 
+			return $customer_id;
 		}else{
 			$this->db->insert('users', $data); 
+			return $this->db->insert_id();
 		}
 	
 	}

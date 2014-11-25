@@ -89,6 +89,14 @@
 				   <label for="note">Notes</label>
 				   <textarea class="form-control" id="note" name="note"><?php if(!empty($customer->notes)) echo $customer->notes;?></textarea>
 				  </div>
+				  <div class="form-group">
+				   <label for="username">Username</label>
+				   <input type="text" class="form-control" id="username" name="username" placeholder="" required value="<?php if(!empty($customer->username)) echo $customer->username;?>">
+				  </div>
+				  <div class="form-group">
+				   <label for="password">Password</label>
+				   <input type="password" class="form-control" id="password" name="password" placeholder="" required value="">
+				  </div>
 				  <div class="overlay edit_policy_overlay" style="display: none;"></div>
 				</div>
 			 </fieldset>

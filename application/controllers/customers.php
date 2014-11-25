@@ -163,6 +163,8 @@ class Customers extends MY_Controller {
 		$business_address = $this->input->post('business_address');
 		$nric = $this->input->post('NRIC');
 		$notes = $this->input->post('note');
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
 		
 		$profile_photo = FALSE;
 		
@@ -188,7 +190,7 @@ class Customers extends MY_Controller {
 	
 		}
 		
-		$this->users_model->saveCustomer($profile_photo,$customer_id,$dob[2]."-".$dob[1]."-".$dob[0],$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes);
+		$this->users_model->saveCustomer($profile_photo,$customer_id,$dob[2]."-".$dob[1]."-".$dob[0],$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,$username,$password);
 		
 		$data['success_messages'][] = "Operation successfully completed";
 		
