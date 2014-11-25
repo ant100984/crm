@@ -38,6 +38,7 @@ class Crmusers extends MY_Controller {
 		$manage_customers = $this->input->post('manage_customers');
 		$manage_crmusers = $this->input->post('manage_crmusers');
 		$manage_messages = $this->input->post('manage_messages');
+		$manage_appointments = $this->input->post('manage_appointments');
 		
 		$profile_photo = FALSE;
 		
@@ -63,7 +64,13 @@ class Crmusers extends MY_Controller {
 	
 		}
 		
-		$userId = $this->users_model->saveUser($profile_photo, $userId,'1970-01-01',$firstname,$lastname,0,"","","",$email,"","","","","crmuser",$username,$password);
+		$userId = $this->users_model->saveUser($profile_photo, $userId, '1970-01-01', $firstname, $lastname , 0, "", "", "", $email, "", "", "", "", "crmuser", $username, $password);
+		
+		$this->users_model->manageUserPermission($userId, "manage_newsletters", $manage_newsletters);
+		$this->users_model->manageUserPermission($userId, "manage_customers", $manage_customers);
+		$this->users_model->manageUserPermission($userId, "manage_crmusers", $manage_crmusers);
+		$this->users_model->manageUserPermission($userId, "manage_messages", $manage_messages);
+		$this->users_model->manageUserPermission($userId, "manage_appointments", $manage_appointments);
 		
 		$this->index($userId);
 	}

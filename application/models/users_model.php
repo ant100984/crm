@@ -156,4 +156,31 @@ class Users_model extends CI_Model {
 		else
 			return FALSE;
 	}
+	
+	public function manageUserPermission($userId, $permission, $value){
+	
+		if(!empty($value) && $value == "on"){
+		
+			$this->db->select('*');
+			$this->db->from('user_permissions u');
+			$this->db->where("u.user = {$userId}");
+			$this->db->where("u.permission = '{$permission}'");
+			$query = $this->db->get();
+			
+			if($query->num_rows() == 0){
+				$data = array(
+					'user' => $userId,
+					'permission' => $permission
+				);
+				
+				$this->db->insert('user_permissions', $data);
+			}
+			
+		}else{
+			
+			$this->db->delete('user_permissions', array('user' => $userId, 'permission' => $permission)); 
+			
+		}
+	
+	}
 }
