@@ -17,6 +17,21 @@ class Crmusers extends MY_Controller {
 		
 		$data['users'] = $this->users_model->loadUsers(FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,"crmuser");
 		
+		$data['permission_type'] = $this->users_model->loadPermissionType();
+		
+		if($userid !== FALSE){
+			$data['loaded_user'] = $this->users_model->loadUsers($userid,FALSE,FALSE,FALSE,FALSE,FALSE,"crmuser");
+			$user_permissions = $this->users_model->getUserPermissions($userid);
+			
+			$permissions = array();
+			foreach($user_permissions as $perm){
+				$permission_code = $perm->permission;
+				$permissions["{$permission_code}"] = "on";
+			}
+			
+			$data["permissions"] = $permissions;
+		}
+		
 		$this->load->vars($data);
 		
 		$this->load->view('templates/header');
@@ -66,12 +81,17 @@ class Crmusers extends MY_Controller {
 		
 		$userId = $this->users_model->saveUser($profile_photo, $userId, '1970-01-01', $firstname, $lastname , 0, "", "", "", $email, "", "", "", "", "crmuser", $username, $password);
 		
-		$this->users_model->manageUserPermission($userId, "manage_newsletters", $manage_newsletters);
-		$this->users_model->manageUserPermission($userId, "manage_customers", $manage_customers);
-		$this->users_model->manageUserPermission($userId, "manage_crmusers", $manage_crmusers);
-		$this->users_model->manageUserPermission($userId, "manage_messages", $manage_messages);
-		$this->users_model->manageUserPermission($userId, "manage_appointments", $manage_appointments);
+		$permissions = $this->users_model->loadPermissionType();
+		
+		foreach($permissions as $permission){
+			$this->users_model->manageUserPermission($userId, $permission->permission_code, $this->input->post($permission->permission_code));
+		}
 		
 		$this->index($userId);
+	}
+	
+	public function deleteUser($userid){
+		$this->users_model->deleteUser($userid);
+		$this->index();
 	}
 }

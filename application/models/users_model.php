@@ -143,6 +143,10 @@ class Users_model extends CI_Model {
 		$this->db->delete('attachments', array('id' => $id)); 
 	}
 	
+	public function deleteUser($userid){
+		$this->db->delete('users', array('id' => $userid)); 
+	}
+	
 	public function checkLogin($username,$password){
 		$this->db->select('*');
 		$this->db->from('users u');
@@ -182,5 +186,23 @@ class Users_model extends CI_Model {
 			
 		}
 	
+	}
+	
+	public function loadPermissionType(){
+		$this->db->select('permission_name, permission_code');
+		$this->db->from('permission_type');
+		
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	public function getUserPermissions($userId){
+		$this->db->select('*');
+		$this->db->from('user_permissions u');
+		$this->db->where("u.user = {$userId}");
+		
+		$query = $this->db->get();
+		
+		return $query->result();
 	}
 }

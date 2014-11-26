@@ -39,15 +39,20 @@
 		<?php } ?>
 	</form>
 	<br/>
-	<button type="button" id="add_selected" class="btn btn-success">
-		<span class="glyphicon glyphicon-plus"></span> Add Selected
-	</button>
+	
+	<?php if($CUSTOMERS_SELECTABLE){ ?>
+		<button type="button" id="add_selected" class="btn btn-success">
+			<span class="glyphicon glyphicon-plus"></span> Add Selected
+		</button>
+	<?php } ?>
+	
 	<table class="table table-bordered table-striped table-condensed" style="margin-top:50px;">
 		<thead>
 		  <tr>
 			<?php if($CUSTOMERS_SELECTABLE){ ?>
 			<th><input type="checkbox" id="select_all_customers" name="select_all_customers"/></th>
 			<?php } ?>
+			<th></th>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Gender</th>
@@ -66,14 +71,15 @@
 					if($CUSTOMERS_SELECTABLE){
 						echo "<td><input class='customer_checkbox' type='checkbox' id='select_customer_".$customer->id."' name='select_customer[]' value='".$customer->id."'/></td>";
 					}
-					echo "<td>".$customer->firstname."</td>";
-					echo "<td>".$customer->lastname."</td>";
-					echo "<td>".($customer->gender == 'M' ? 'Male' : 'Female')."</td>";
-					echo "<td>".$customer->homeaddress."</td>";
-					echo "<td>".$customer->businessaddress."</td>";
-					echo "<td>".$customer->group_name."</td>";
+					echo "<td style='width: 3%; vertical-align: middle !important;'><img src='".base_url().(!empty($customer->profilephoto) ? $customer->profilephoto : 'img/no_image.png')."' class='img-circle'/></td>";
+					echo "<td style='vertical-align: middle !important;'>".$customer->firstname."</td>";
+					echo "<td style='vertical-align: middle !important;'>".$customer->lastname."</td>";
+					echo "<td style='vertical-align: middle !important;'>".($customer->gender == 'M' ? 'Male' : 'Female')."</td>";
+					echo "<td style='vertical-align: middle !important;'>".$customer->homeaddress."</td>";
+					echo "<td style='vertical-align: middle !important;'>".$customer->businessaddress."</td>";
+					echo "<td style='vertical-align: middle !important;'>".$customer->group_name."</td>";
 					if($ACTION_BUTTONS) {
-						echo "<td style='width: 195px;'>";
+						echo "<td style='width: 195px; vertical-align: middle !important;'>";
 							echo "<a href='".base_url()."/index.php/customers/getCustomer/".$customer->id."' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Details</a>";
 							if($customer->enabled == 1){
 								echo "<a href='".base_url()."/index.php/customers/setCustomerEnabled/".$customer->id."/0' class='btn btn-xs btn-warning' role='button'><span class='fa fa-lock'></span> Disable</a>";
