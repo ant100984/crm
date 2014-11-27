@@ -15,6 +15,20 @@ class Crmusers extends MY_Controller {
 	public function index($userid=FALSE){	
 		$data['location'] = 'CRM Users';
 		
+		$logged_user = $this->session->userdata('userid');
+		$user_permissions = $this->session->userdata('permissions');
+		
+		if(!in_array("manage_crmusers", $user_permissions) && ($userid != $logged_user)){
+			$data["error_messages"][] = "You don't have the rights to access this page";
+			
+			$this->load->vars($data);
+			
+			$this->load->view('templates/header');
+			$this->load->view('templates/menu');
+			$this->load->view('templates/footer');	
+			return;
+		}
+		
 		$data['users'] = $this->users_model->loadUsers(FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,"crmuser");
 		
 		$data['permission_type'] = $this->users_model->loadPermissionType();
@@ -81,10 +95,16 @@ class Crmusers extends MY_Controller {
 		
 		$userId = $this->users_model->saveUser($profile_photo, $userId, '1970-01-01', $firstname, $lastname , 0, "", "", "", $email, "", "", "", "", "crmuser", $username, $password);
 		
-		$permissions = $this->users_model->loadPermissionType();
+		$user_permissions = $this->session->userdata('permissions');
 		
-		foreach($permissions as $permission){
-			$this->users_model->manageUserPermission($userId, $permission->permission_code, $this->input->post($permission->permission_code));
+		if(in_array("manage_crmusers",$user_permissions)){
+		
+			$permissions = $this->users_model->loadPermissionType();
+			
+			foreach($permissions as $permission){
+				$this->users_model->manageUserPermission($userId, $permission->permission_code, $this->input->post($permission->permission_code));
+			}
+		
 		}
 		
 		$this->index($userId);

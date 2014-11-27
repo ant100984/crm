@@ -5,7 +5,7 @@
 			<div class="box-body">
 				<div class="form-group">
 					<div class="box-body">
-						<input type="submit" class="btn btn-warning" value="SEND"/>
+						<input id="send" name="send" type="submit" class="btn btn-warning" value="SEND"/>
 						<input id="save" name="save" type="submit" class="btn btn-success" value="SAVE DRAFT"/>
 					</div>
 				</div>

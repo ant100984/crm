@@ -25,9 +25,10 @@
 			dayClick: function(date, jsEvent, view) {	
 				$('.fc-day').css('background-color', 'white');
 				$(this).css('background-color', '#FFEC8B');
-				
+				<?php if(in_array("manage_appointments",$user_permissions)){ ?>
 				$('#confirmModal').modal();
 				$('#selected_date').val(date.format('D/M/YYYY'));
+				<?php } ?>
 			},
 			header: {
 				left: 'prev,next today',
@@ -45,9 +46,11 @@
 				next: 'right-single-arrow'
 			},
 			events: [
-			<?php
-				foreach($appointments as $appointment){
-					echo "{".(!empty($loaded_appointment->id) && ($appointment->id == $loaded_appointment->id) ? "textColor: 'yellow', borderColor: 'yellow',":"")."url: '" . base_url() . "/index.php/appointments/getAppointment/" . $appointment->id . "', title: '".$appointment->firstname." ".$appointment->lastname.": ".$appointment->subject."', start: new Date('".$appointment->start_date_full."'),end: new Date('".$appointment->end_date_full."')},";
+			<?php if(in_array("manage_appointments",$user_permissions)){ 
+			
+					foreach($appointments as $appointment){
+						echo "{".(!empty($loaded_appointment->id) && ($appointment->id == $loaded_appointment->id) ? "textColor: 'yellow', borderColor: 'yellow',":"")."url: '" . base_url() . "/index.php/appointments/getAppointment/" . $appointment->id . "', title: '".$appointment->firstname." ".$appointment->lastname.": ".$appointment->subject."', start: new Date('".$appointment->start_date_full."'),end: new Date('".$appointment->end_date_full."')},";
+					}
 				}
 			?>
 				/*{

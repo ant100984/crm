@@ -205,4 +205,16 @@ class Users_model extends CI_Model {
 		
 		return $query->result();
 	}
+	
+	public function getUserPermissionsArray($userId){
+		$permissions = $this->getUserPermissions($userId);
+		
+		$result = array();
+		
+		foreach($permissions as $perm){
+			$result[] = $perm->permission;
+		}
+		
+		return $result;
+	}
 }

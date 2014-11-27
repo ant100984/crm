@@ -19,6 +19,7 @@
 						<i class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a>
 				</li>
+				<?php if(in_array("manage_customers",$user_permissions)){ ?>
 				<li class="treeview <?php if(!empty($menu_active) && $menu_active == "customers") echo "active"; ?>">
 					<a href="#">
 						<i class="fa fa-user"></i>
@@ -31,6 +32,8 @@
 						<li><a href="<?php echo base_url();?>index.php/groups"><i class="fa fa-angle-double-right"></i>Manage Groups</a></li>
 					</ul>
 				</li>
+				<?php } ?>
+				<?php if(in_array("manage_messages",$user_permissions) || in_array("manage_newsletters",$user_permissions)){ ?>
 				<li class="treeview <?php if(!empty($menu_active) && $menu_active == "messaging") echo "active"; ?>">
 					<a href="#">
 						<i class="fa fa-comment"></i>
@@ -38,11 +41,17 @@
 						<i class="fa fa-angle-left pull-right"></i>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="<?php echo base_url();?>index.php/messages"><i class="fa fa-angle-double-right"></i> Instant Messages</a></li>
-						<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Create Newsletter</a></li>
-						<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Newsletters List</a></li>
+						<?php if(in_array("manage_messages",$user_permissions)){ ?>
+							<li><a href="<?php echo base_url();?>index.php/messages"><i class="fa fa-angle-double-right"></i> Instant Messages</a></li>
+						<?php } ?>
+						<?php if(in_array("manage_newsletters",$user_permissions)){ ?>
+							<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Create Newsletter</a></li>
+							<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Newsletters Archive</a></li>
+						<?php } ?>
 					</ul>
 				</li>
+				<?php } ?>
+				<?php if(in_array("manage_appointments",$user_permissions)){ ?>
 				<li class="treeview <?php if(!empty($menu_active) && $menu_active == "appointments") echo "active"; ?>">
 					<a href="#">
 						<i class="fa fa-calendar"></i>
@@ -50,9 +59,10 @@
 						<i class="fa fa-angle-left pull-right"></i>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="<?php echo base_url();?>index.php/appointments/getAppointment"><i class="fa fa-angle-double-right"></i> Show Calendar</a></li>
+						<li><a href="<?php echo base_url();?>index.php/appointments/getAppointment"><i class="fa fa-angle-double-right"></i> Manage Appointments</a></li>
 					</ul>
 				</li>
+				<?php } ?>
 			</ul>
 		</section>
 		<!-- /.sidebar -->

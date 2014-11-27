@@ -13,7 +13,7 @@
 						<div class="form-group">
 							<button type="submit" name="save" class="btn btn-success"><?php if(!empty($loaded_user->id)) echo "Update"; else echo "Save"; ?></button>
 							<?php
-								if(!empty($loaded_user->id)){
+								if(!empty($loaded_user->id) && in_array("manage_crmusers",$user_permissions)){
 							?>
 									<a href="<?php echo base_url()."index.php/crmusers"; ?>" class="btn btn-danger">Cancel</a>
 							<?php
@@ -48,24 +48,29 @@
 						</div>
 						<?php 
 						
-						foreach($permission_type as $permission) { 
-							if(isset($permissions["{$permission->permission_code}"]) && $permissions["{$permission->permission_code}"] == "on")
-								$checked = "checked='checked'";
-							else
-								$checked = "";
-						?>
-						<div class="form-group">
-							<label for="<?php echo $permission->permission_code; ?>">
-								<input type="checkbox" class="form-control" id="<?php echo $permission->permission_code; ?>" name="<?php echo $permission->permission_code; ?>" <?php echo $checked; ?> >
-								<?php echo $permission->permission_name; ?>
-							</label>
-						</div>
+						if(in_array("manage_crmusers",$user_permissions)){
+							
+							foreach($permission_type as $permission) { 
+								if(isset($permissions["{$permission->permission_code}"]) && $permissions["{$permission->permission_code}"] == "on")
+									$checked = "checked='checked'";
+								else
+									$checked = "";
+								?>
+								<div class="form-group">
+									<label for="<?php echo $permission->permission_code; ?>">
+										<input type="checkbox" class="form-control" id="<?php echo $permission->permission_code; ?>" name="<?php echo $permission->permission_code; ?>" <?php echo $checked; ?> >
+										<?php echo $permission->permission_name; ?>
+									</label>
+								</div>
+							<?php } ?>
+							
 						<?php } ?>
 					</fieldset>
 				</form>
 			</div>
 		</div>
 	</div>
+	<?php if(in_array("manage_crmusers",$user_permissions)){ ?>
 	<div class="col-md-5">
 		<div class="box">
 			<div class="box-header">
@@ -100,6 +105,7 @@
 			<div class="overlay users_list_overlay" style="display: none;"></div>
 		</div>
 	</div>
+	<?php } ?>
 </div>
 <script type="text/javascript">
 	$(function() {

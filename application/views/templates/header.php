@@ -148,12 +148,21 @@
                             <ul class="dropdown-menu">
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-									<div class="pull-left">
-                                        <a href="<?php echo base_url()."/index.php/crmusers"; ?>" class="btn btn-default btn-flat">CRM Users</a>
-                                    </div>
+									
+									<?php if(!in_array("manage_crmusers",$user_permissions)){ ?>
+									
+										<div class="pull-left">	
+											<a href="<?php echo base_url()."/index.php/crmusers/index/".$userid; ?>" class="btn btn-default btn-flat">Profile</a>
+										</div>
+										
+									<?php }else{ ?>
+									
+										<div class="pull-left">
+											<a href="<?php echo base_url()."/index.php/crmusers"; ?>" class="btn btn-default btn-flat">CRM Users</a>
+										</div>
+										
+									<?php } ?>
+									
                                     <div class="pull-right">
                                         <a href="<?php echo base_url()."/index.php/logout"; ?>" class="btn btn-danger btn-flat">Logout</a>
                                     </div>

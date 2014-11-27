@@ -19,6 +19,8 @@ class MY_Controller extends CI_Controller {
 		$username = $this->session->userdata('username');
 		$userid = $this->session->userdata('userid');
 		$displayname = $this->session->userdata('display_name');
+		$data['user_permissions'] = $this->session->userdata('permissions');
+		$data['userid'] = $userid;
 		
 		$user = $this->users_model->loadUsers($userid,FALSE,FALSE,FALSE,FALSE,FALSE,"crmuser",FALSE);
 		
