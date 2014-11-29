@@ -3,15 +3,23 @@
 		<form role="form" action="<?php echo base_url() . "/index.php/newsletter/saveNewsletter"; ?>" method="post" enctype="multipart/form-data">
 			<input type="hidden" id="newsletter_id" name="newsletter_id" value="<?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->id; ?>"/>
 			<div class="box-body">
+				<?php
+					$editable = false;
+					if(empty($loaded_newsletter->id) || ($loaded_newsletter->status == "DRAFT")){
+						$editable = true;
+				?>
 				<div class="form-group">
 					<div class="box-body">
-						<input id="send" name="send" type="submit" class="btn btn-warning" value="SEND"/>
 						<input id="save" name="save" type="submit" class="btn btn-success" value="SAVE DRAFT"/>
+						<input id="send" name="send" type="submit" class="btn btn-warning" value="SEND"/>
 					</div>
 				</div>
+				<?php
+					}
+				?>
 				<div class="form-group">
 					<label for="template">Templates</label>
-					<select name="template" id="template" class="form-control">
+					<select name="template" id="template" class="form-control" <?php if(!$editable) echo "disabled"; ?>>
 						<option value="" ></option>
 						<?php foreach($templates as $template){
 							echo "<option ".((!empty($loaded_newsletter) && $loaded_newsletter->template_id == $template->id) ? "selected" : "")." value='".$template->id."'>".$template->title."</option>";
@@ -32,11 +40,11 @@
 				</div><!-- /.box-header -->
 				<div class='box-body pad'>
 					<!-- style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" -->
-					<textarea name="newsletter_body" id="newsletter_body" class="textarea"><?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->body; ?></textarea>
+					<textarea <?php if(!$editable) echo "disabled"; ?> name="newsletter_body" id="newsletter_body" class="textarea"><?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->body; ?></textarea>
 					
-					<input class="form-control" type="text" id="template_title" name="template_title" placeholder="Enter a title..."/>
+					<input <?php if(!$editable) echo "disabled"; ?> class="form-control" type="text" id="template_title" name="template_title" placeholder="Enter a title..."/>
 					<label>
-						<input type="checkbox" id="save_as_template" name="save_as_template"/>
+						<input <?php if(!$editable) echo "disabled"; ?> type="checkbox" id="save_as_template" name="save_as_template"/>
 						Save as template
 					</label>
 				</div>
@@ -59,7 +67,9 @@
 								<td><?php echo $attachment->filename; ?></td>
 								<td>
 									<a href="" class="btn btn-xs btn-neutral" role="button"><span class="glyphicon glyphicon-search"></span> View</a>
-									<a href="<?php echo base_url() . "/index.php/newsletter/deleteAttachment/".$attachment->id."/".$attachment->newsletter_id; ?>" class="btn btn-xs btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+									<?php if($editable) { ?>
+										<a href="<?php echo base_url() . "/index.php/newsletter/deleteAttachment/".$attachment->id."/".$attachment->newsletter_id; ?>" class="btn btn-xs btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+									<?php } ?>
 								</td>
 							  </tr>
 						<?php
@@ -68,8 +78,10 @@
 						?>
 						</tbody>
 					</table>
-					<input type="file" name="attachment" id="attachment" style="display: inline;"/>
-					<input id="upload" name="upload" type="submit" class="btn btn-success" value="UPLOAD"/>
+					<?php if($editable) { ?>
+						<input type="file" name="attachment" id="attachment" style="display: inline;"/>
+						<input id="upload" name="upload" type="submit" class="btn btn-success" value="UPLOAD"/>
+					<?php } ?>
 				</div>
 			</div>
 		</form>
@@ -79,6 +91,7 @@
 	if(!empty($loaded_newsletter->id)){
 ?>
 <div class="row">
+	<?php if($editable) { ?>
 	<div class="col-md-9">
 		<div class='box'>
 			<div class='box-header'>
@@ -98,6 +111,7 @@
 			<div class="loading-img" style="display: none;"></div>
 		</div>
 	</div>
+	<?php } ?>
 	<div class="col-md-3">
 			
 		<div class='box'>
@@ -108,7 +122,7 @@
 				</div><!-- /. tools -->
 			</div>
 			<div class="box-body" id="selected_customers">
-				
+				<?php require_once('selectedCustomers.php'); ?>
 			</div>
 		</div>
 			

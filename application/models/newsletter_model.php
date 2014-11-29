@@ -18,7 +18,7 @@ class Newsletter_model extends CI_Model {
 	}
 	
 	public function getNewsletter($newsletter_id){
-		$this->db->select('n.id, n.body, n.template_id, n.dtmsent, n.dtmcreated');
+		$this->db->select('n.id, n.body, n.template_id, n.status, n.dtmsent, n.dtmcreated');
 		$this->db->from('newsletters n');
 		$this->db->where('id',$newsletter_id);
 		
@@ -26,14 +26,14 @@ class Newsletter_model extends CI_Model {
 		return $query->row();
 	}
 	
-	public function saveNewsletter($newsletter_id=FALSE, $template_id, $newsletter_body){
+	public function saveNewsletter($newsletter_id=FALSE, $template_id, $newsletter_body, $status="DRAFT"){
 		date_default_timezone_set('Asia/Singapore');
 		
 		$data = array(
 			"dtmcreated" => date("Y-m-d H:i:s"),
 			"template_id" => $template_id === FALSE ? null : $template_id,
 			"body" => $newsletter_body,
-			"status" => "DRAFT"
+			"status" => $status
 		);
 		
 		if($newsletter_id !== FALSE){

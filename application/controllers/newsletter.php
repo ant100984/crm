@@ -55,11 +55,11 @@ class Newsletter extends MY_Controller {
 	}
 	
 	public function saveNewsletter(){
-		error_log(print_r($_POST,true));
+		error_log(print_r($_POST, true));
 		
-		if($this->input->post('send') == "send"){
+		if($this->input->post('send') == "SEND"){
 			$status = "TO_BE_SENT";
-			c = "TO BE SENT";
+			$statusDisplay = "TO BE SENT";
 		}else{
 			$status = "DRAFT";
 			$statusDisplay = "DRAFT";
@@ -71,7 +71,7 @@ class Newsletter extends MY_Controller {
 		
 		$upload = $this->input->post('upload');
 		
-		$newsletter_id = $this->newsletter_model->saveNewsletter(empty($newsletter_id) ? FALSE : $newsletter_id, empty($template_id) ? FALSE : $template_id, $newsletter_body);
+		$newsletter_id = $this->newsletter_model->saveNewsletter(empty($newsletter_id) ? FALSE : $newsletter_id, empty($template_id) ? FALSE : $template_id, $newsletter_body, $status);
 		
 		$template_title = $this->input->post('template_title');
 		$save_as_template = $this->input->post('save_as_template');
