@@ -111,7 +111,7 @@ CREATE TABLE `newsletter_customer` (
   `status` varchar(10) DEFAULT NULL,
   `dtmsent` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `newsletter_templates` */
 
@@ -122,7 +122,7 @@ CREATE TABLE `newsletter_templates` (
   `title` varchar(255) DEFAULT NULL,
   `body` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `newsletters` */
 
@@ -136,7 +136,7 @@ CREATE TABLE `newsletters` (
   `dtmcreated` datetime DEFAULT NULL,
   `dtmsent` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `permission_type` */
 
@@ -197,7 +197,7 @@ CREATE TABLE `user_permissions` (
   `user` int(11) DEFAULT NULL,
   `permission` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `users` */
 
