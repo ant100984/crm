@@ -30,6 +30,10 @@ CREATE TABLE `appointments` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
+/*Data for the table `appointments` */
+
+insert  into `appointments`(`id`,`user_id`,`subject`,`message`,`start_date`,`end_date`,`location`,`alert`) values (1,1,'test s.','test message','2014-10-30 17:12:33','2014-10-31 18:12:38','',NULL),(2,1,'test s.','test message','2014-10-31 17:14:53','2014-11-01 17:15:01',NULL,NULL),(7,1,'test','test','2014-11-12 08:45:00','2014-11-12 10:45:00','casa','1h'),(8,2,'test','test','2014-11-12 11:00:00','2014-11-12 11:00:00','casa',''),(9,1,'test','test','2014-11-13 07:15:00','2014-11-13 07:15:00','casa','');
+
 /*Table structure for table `appointments_remarks` */
 
 DROP TABLE IF EXISTS `appointments_remarks`;
@@ -40,6 +44,10 @@ CREATE TABLE `appointments_remarks` (
   `notes` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+/*Data for the table `appointments_remarks` */
+
+insert  into `appointments_remarks`(`id`,`appointment_id`,`notes`) values (3,7,'testb'),(5,7,'testv'),(6,7,'Today we have been going through explaining how...Today we have been going through explaining how...Today we have been going through explaining how...Today we have been going through explaining how...');
 
 /*Table structure for table `attachments` */
 
@@ -53,6 +61,10 @@ CREATE TABLE `attachments` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
+/*Data for the table `attachments` */
+
+insert  into `attachments`(`id`,`attachment_name`,`attachment_path`,`user_id`) values (6,'ComplianceAssist_Integration_Guide_V1.5_.pdf','attachments/ComplianceAssist_Integration_Guide_V1.5_.pdf',1),(7,'bg.jpg','attachments/bg.jpg',2);
+
 /*Table structure for table `duration_type` */
 
 DROP TABLE IF EXISTS `duration_type`;
@@ -64,6 +76,10 @@ CREATE TABLE `duration_type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+/*Data for the table `duration_type` */
+
+insert  into `duration_type`(`id`,`code`,`description`) values (1,'M','Month'),(2,'D','Day'),(3,'Y','Year');
+
 /*Table structure for table `groups` */
 
 DROP TABLE IF EXISTS `groups`;
@@ -73,6 +89,10 @@ CREATE TABLE `groups` (
   `group_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+/*Data for the table `groups` */
+
+insert  into `groups`(`id`,`group_name`) values (8,'Group A'),(9,'Group B'),(11,'Group C');
 
 /*Table structure for table `messages` */
 
@@ -88,6 +108,10 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
+/*Data for the table `messages` */
+
+insert  into `messages`(`id`,`messagetext`,`sender`,`receiver`,`datesent`,`dateread`) values (1,'asdasdasd',2,1,'2014-10-22 17:19:04','2014-11-13 04:54:24'),(2,'test',1,2,'2014-11-11 02:03:38',NULL),(3,'Welcome',1,3,'2014-11-12 15:40:44',NULL),(4,'',1,3,'2014-11-12 15:41:27',NULL),(5,'Hello',1,3,'2014-11-12 15:44:35',NULL),(6,'Are you there?',1,3,'2014-11-12 15:47:26',NULL),(7,'asdasd',1,3,'2014-11-12 15:47:42',NULL),(8,'i am waiting for your feedback',1,2,'2014-11-12 22:48:32',NULL),(9,'asdasd',1,2,'2014-11-12 22:52:06',NULL),(10,'asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh asdasf d sdsdgsg fddfhdfhdfhh ',2,1,'2014-11-12 15:56:55','2014-11-13 04:54:24'),(11,'giesucri',1,2,'2014-11-12 22:57:57',NULL),(12,'Are you there?',1,3,'2014-11-12 23:04:57',NULL),(13,'how are you',1,3,'2014-11-12 23:05:08',NULL),(14,'ddd',1,3,'2014-11-12 23:05:13',NULL),(15,'asdasdasda',1,3,'2014-11-12 23:05:20',NULL),(16,'asdasdasda',1,3,'2014-11-12 23:40:41',NULL),(17,'asddasd',1,2,'2014-11-12 23:41:18',NULL),(18,'asdasd',1,2,'2014-11-12 23:41:22',NULL),(19,'asdasdas',1,2,'2014-11-12 23:41:25',NULL);
+
 /*Table structure for table `newsletter_attachments` */
 
 DROP TABLE IF EXISTS `newsletter_attachments`;
@@ -99,6 +123,10 @@ CREATE TABLE `newsletter_attachments` (
   `filename` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `newsletter_attachments` */
+
+insert  into `newsletter_attachments`(`id`,`newsletter_id`,`filepath`,`filename`) values (1,26,'attachments/',NULL),(2,32,'attachments/apple-logo.gif','apple-logo.gif'),(3,34,'attachments/apple-logo.gif','apple-logo.gif');
 
 /*Table structure for table `newsletter_customer` */
 
@@ -113,6 +141,10 @@ CREATE TABLE `newsletter_customer` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
+/*Data for the table `newsletter_customer` */
+
+insert  into `newsletter_customer`(`id`,`newsletter`,`customer`,`status`,`dtmsent`) values (5,42,2,'NOT_SENT',NULL),(6,42,3,'NOT_SENT',NULL),(7,43,2,'NOT_SENT',NULL),(8,43,3,'NOT_SENT',NULL),(9,44,2,'NOT_SENT',NULL),(10,44,3,'NOT_SENT',NULL),(11,45,2,'NOT_SENT',NULL),(12,45,3,'NOT_SENT',NULL),(13,46,2,'NOT_SENT',NULL),(14,46,3,'NOT_SENT',NULL),(15,46,31,'NOT_SENT',NULL),(16,46,9,'NOT_SENT',NULL),(17,46,4,'NOT_SENT',NULL),(18,46,8,'NOT_SENT',NULL),(19,46,13,'NOT_SENT',NULL),(20,46,14,'NOT_SENT',NULL),(21,46,6,'NOT_SENT',NULL),(22,46,7,'NOT_SENT',NULL),(23,47,2,'NOT_SENT',NULL),(24,47,3,'NOT_SENT',NULL),(25,47,24,'NOT_SENT',NULL),(26,48,2,'NOT_SENT',NULL),(27,48,3,'NOT_SENT',NULL),(28,50,2,'NOT_SENT',NULL),(30,50,4,'NOT_SENT',NULL),(31,51,2,'NOT_SENT',NULL),(32,51,3,'NOT_SENT',NULL),(33,51,4,'NOT_SENT',NULL),(34,52,2,'NOT_SENT',NULL),(37,52,4,'NOT_SENT',NULL),(38,52,28,'NOT_SENT',NULL),(39,52,29,'NOT_SENT',NULL),(40,58,2,'NOT_SENT',NULL),(41,59,2,'NOT_SENT',NULL),(42,60,2,'NOT_SENT',NULL);
+
 /*Table structure for table `newsletter_templates` */
 
 DROP TABLE IF EXISTS `newsletter_templates`;
@@ -123,6 +155,10 @@ CREATE TABLE `newsletter_templates` (
   `body` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `newsletter_templates` */
+
+insert  into `newsletter_templates`(`id`,`title`,`body`) values (1,'Special Offer','231123123123'),(2,'','');
 
 /*Table structure for table `newsletters` */
 
@@ -138,6 +174,10 @@ CREATE TABLE `newsletters` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
+/*Data for the table `newsletters` */
+
+insert  into `newsletters`(`id`,`template_id`,`body`,`status`,`dtmcreated`,`dtmsent`) values (42,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 05:59:34',NULL),(43,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:00:43',NULL),(44,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:23:11',NULL),(45,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:27:10',NULL),(46,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:27:36',NULL),(47,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:08:22',NULL),(48,1,'<p>asdas</p>\r\n','DRAFT','2014-11-19 07:14:12',NULL),(49,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:23:05',NULL),(50,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:29:58',NULL),(51,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:35:37',NULL),(52,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:37:06',NULL),(53,1,'','DRAFT','2014-11-28 00:50:42',NULL),(54,1,'<p>asdasdasd</p>\r\n','DRAFT','2014-11-28 00:51:16',NULL),(55,1,'<p>aaaaa</p>\r\n','DRAFT','2014-11-28 17:15:04',NULL),(56,NULL,'0','DRAFT','2014-11-28 17:25:20',NULL),(57,1,'<p>asdasdasdasdasd</p>\r\n','TO_BE_SENT','2014-11-28 17:58:56',NULL),(58,1,'<p>aaaaaaa</p>\r\n','TO_BE_SENT','2014-11-28 18:03:45',NULL),(59,1,'<p>sssssss</p>\r\n','DRAFT','2014-11-28 18:03:53',NULL),(60,1,'<p>sssssss</p>\r\n','TO_BE_SENT','2014-11-28 18:04:37',NULL);
+
 /*Table structure for table `permission_type` */
 
 DROP TABLE IF EXISTS `permission_type`;
@@ -148,6 +188,10 @@ CREATE TABLE `permission_type` (
   `permission_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `permission_type` */
+
+insert  into `permission_type`(`id`,`permission_code`,`permission_name`) values (1,'manage_newsletters','Manage Newsletters'),(2,'manage_customers','Manage Customers'),(3,'manage_crmusers','Manage CRM Users'),(4,'manage_appointments','Manage Appointments'),(5,'manage_messages','Manage Messages');
 
 /*Table structure for table `policies` */
 
@@ -164,6 +208,10 @@ CREATE TABLE `policies` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+/*Data for the table `policies` */
+
+insert  into `policies`(`id`,`user_id`,`description`,`date`,`reminder`,`status`,`notes`) values (2,1,'Ppp','2014-11-01','MTY','PD','zzzzzzzz');
+
 /*Table structure for table `policies_reminder` */
 
 DROP TABLE IF EXISTS `policies_reminder`;
@@ -177,6 +225,10 @@ CREATE TABLE `policies_reminder` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+/*Data for the table `policies_reminder` */
+
+insert  into `policies_reminder`(`id`,`code`,`description`,`duration_entity`,`duration_type`) values (1,'MTY','Monthly',1,'M'),(2,'QTY','Quarterly',3,'M');
+
 /*Table structure for table `policies_status` */
 
 DROP TABLE IF EXISTS `policies_status`;
@@ -188,6 +240,10 @@ CREATE TABLE `policies_status` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+/*Data for the table `policies_status` */
+
+insert  into `policies_status`(`id`,`code`,`description`) values (1,'PD','Paid'),(2,'UPD','Unpaid');
+
 /*Table structure for table `user_permissions` */
 
 DROP TABLE IF EXISTS `user_permissions`;
@@ -198,6 +254,10 @@ CREATE TABLE `user_permissions` (
   `permission` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+/*Data for the table `user_permissions` */
+
+insert  into `user_permissions`(`id`,`user`,`permission`) values (7,1,'manage_newsletters'),(8,1,'manage_customers'),(9,1,'manage_messages'),(10,1,'manage_crmusers'),(11,1,'manage_appointments'),(17,37,'manage_newsletters'),(18,37,'manage_customers'),(20,37,'manage_appointments'),(21,37,'manage_messages');
 
 /*Table structure for table `users` */
 
@@ -227,6 +287,10 @@ CREATE TABLE `users` (
   `isAdmin` int(1) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+
+/*Data for the table `users` */
+
+insert  into `users`(`id`,`type`,`firstname`,`lastname`,`dateofbirth`,`gender`,`occupation`,`smoker`,`homeaddress`,`businessaddress`,`nric`,`notes`,`group`,`profilephoto`,`phone`,`email`,`username`,`password`,`lastlogin`,`enabled`,`isAdmin`) values (1,'crmuser','System','',NULL,'','','N','','','','',NULL,'attachments/avatar.png',NULL,NULL,'admin','21232f297a57a5a743894a0e4a801fc3',NULL,1,1),(2,'customer','pippo','pippo','1979-06-04','M','Developer','Y','bbbbb','bbbbb','12345','aaa',9,'attachments/avatar2.png',NULL,'aaaaa',NULL,NULL,NULL,1,0),(37,'crmuser','Antonio','Esposito','1970-01-01','','','','','','','',0,'attachments/avatar5.png',NULL,'esp.antonio@gmail.com','aesposito','4a181673429f0b6abbfd452f0f3b5950',NULL,1,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
