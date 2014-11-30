@@ -359,6 +359,7 @@ $config['proxy_ips'] = '';
 $config['root_path'] = dirname(dirname(dirname(__DIR__)));
 $config['attachments_folder'] = "attachments";
 $config['attachments_full_path'] = $config['root_path'] . DIRECTORY_SEPARATOR . "crm" . DIRECTORY_SEPARATOR . $config['attachments_folder'];
+$config['crm_folder'] = $config['root_path'] . DIRECTORY_SEPARATOR . "crm";
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.5 (64 bit)
-MySQL - 5.6.14 : Database - crm
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.5.13 : Database - crm
 *********************************************************************
 */
 
@@ -12,6 +12,8 @@ MySQL - 5.6.14 : Database - crm
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`crm` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
 USE `crm`;
 
 /*Table structure for table `appointments` */
@@ -139,11 +141,11 @@ CREATE TABLE `newsletter_customer` (
   `status` varchar(10) DEFAULT NULL,
   `dtmsent` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 /*Data for the table `newsletter_customer` */
 
-insert  into `newsletter_customer`(`id`,`newsletter`,`customer`,`status`,`dtmsent`) values (5,42,2,'NOT_SENT',NULL),(6,42,3,'NOT_SENT',NULL),(7,43,2,'NOT_SENT',NULL),(8,43,3,'NOT_SENT',NULL),(9,44,2,'NOT_SENT',NULL),(10,44,3,'NOT_SENT',NULL),(11,45,2,'NOT_SENT',NULL),(12,45,3,'NOT_SENT',NULL),(13,46,2,'NOT_SENT',NULL),(14,46,3,'NOT_SENT',NULL),(15,46,31,'NOT_SENT',NULL),(16,46,9,'NOT_SENT',NULL),(17,46,4,'NOT_SENT',NULL),(18,46,8,'NOT_SENT',NULL),(19,46,13,'NOT_SENT',NULL),(20,46,14,'NOT_SENT',NULL),(21,46,6,'NOT_SENT',NULL),(22,46,7,'NOT_SENT',NULL),(23,47,2,'NOT_SENT',NULL),(24,47,3,'NOT_SENT',NULL),(25,47,24,'NOT_SENT',NULL),(26,48,2,'NOT_SENT',NULL),(27,48,3,'NOT_SENT',NULL),(28,50,2,'NOT_SENT',NULL),(30,50,4,'NOT_SENT',NULL),(31,51,2,'NOT_SENT',NULL),(32,51,3,'NOT_SENT',NULL),(33,51,4,'NOT_SENT',NULL),(34,52,2,'NOT_SENT',NULL),(37,52,4,'NOT_SENT',NULL),(38,52,28,'NOT_SENT',NULL),(39,52,29,'NOT_SENT',NULL),(40,58,2,'NOT_SENT',NULL),(41,59,2,'NOT_SENT',NULL),(42,60,2,'NOT_SENT',NULL);
+insert  into `newsletter_customer`(`id`,`newsletter`,`customer`,`status`,`dtmsent`) values (13,46,2,'NOT_SENT',NULL),(14,46,3,'NOT_SENT',NULL),(15,46,31,'NOT_SENT',NULL),(16,46,9,'NOT_SENT',NULL),(17,46,4,'NOT_SENT',NULL),(18,46,8,'NOT_SENT',NULL),(19,46,13,'NOT_SENT',NULL),(20,46,14,'NOT_SENT',NULL),(21,46,6,'NOT_SENT',NULL),(22,46,7,'NOT_SENT',NULL),(40,58,2,'NOT_SENT',NULL),(42,60,2,'NOT_SENT',NULL),(44,65,2,'NOT_SENT',NULL),(45,70,2,'NOT_SENT',NULL),(46,71,2,'NOT_SENT',NULL),(47,75,2,'NOT_SENT',NULL),(48,77,2,'NOT_SENT',NULL),(49,76,2,'NOT_SENT',NULL),(50,78,2,'NOT_SENT',NULL),(51,79,2,'NOT_SENT',NULL),(52,80,2,'NOT_SENT',NULL),(53,81,2,'NOT_SENT',NULL);
 
 /*Table structure for table `newsletter_templates` */
 
@@ -154,11 +156,11 @@ CREATE TABLE `newsletter_templates` (
   `title` varchar(255) DEFAULT NULL,
   `body` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `newsletter_templates` */
 
-insert  into `newsletter_templates`(`id`,`title`,`body`) values (1,'Special Offer','231123123123'),(2,'','');
+insert  into `newsletter_templates`(`id`,`title`,`body`) values (1,'Special Offer','231123123123'),(2,'',''),(3,'My Template','<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n');
 
 /*Table structure for table `newsletters` */
 
@@ -170,13 +172,15 @@ CREATE TABLE `newsletters` (
   `body` text,
   `status` varchar(10) DEFAULT NULL,
   `dtmcreated` datetime DEFAULT NULL,
+  `usercreated` int(11) DEFAULT NULL,
   `dtmsent` datetime DEFAULT NULL,
+  `usersent` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 /*Data for the table `newsletters` */
 
-insert  into `newsletters`(`id`,`template_id`,`body`,`status`,`dtmcreated`,`dtmsent`) values (42,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 05:59:34',NULL),(43,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:00:43',NULL),(44,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:23:11',NULL),(45,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:27:10',NULL),(46,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 06:27:36',NULL),(47,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:08:22',NULL),(48,1,'<p>asdas</p>\r\n','DRAFT','2014-11-19 07:14:12',NULL),(49,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:23:05',NULL),(50,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:29:58',NULL),(51,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:35:37',NULL),(52,1,'<p>asdasd</p>\r\n','DRAFT','2014-11-19 07:37:06',NULL),(53,1,'','DRAFT','2014-11-28 00:50:42',NULL),(54,1,'<p>asdasdasd</p>\r\n','DRAFT','2014-11-28 00:51:16',NULL),(55,1,'<p>aaaaa</p>\r\n','DRAFT','2014-11-28 17:15:04',NULL),(56,NULL,'0','DRAFT','2014-11-28 17:25:20',NULL),(57,1,'<p>asdasdasdasdasd</p>\r\n','TO_BE_SENT','2014-11-28 17:58:56',NULL),(58,1,'<p>aaaaaaa</p>\r\n','TO_BE_SENT','2014-11-28 18:03:45',NULL),(59,1,'<p>sssssss</p>\r\n','DRAFT','2014-11-28 18:03:53',NULL),(60,1,'<p>sssssss</p>\r\n','TO_BE_SENT','2014-11-28 18:04:37',NULL);
+insert  into `newsletters`(`id`,`template_id`,`body`,`status`,`dtmcreated`,`usercreated`,`dtmsent`,`usersent`) values (46,1,'<p>asdasd</p>\r\n','TO_BE_SENT','2014-11-30 16:27:42',NULL,NULL,NULL),(57,1,'<p>asdasdasdasdasd</p>\r\n','TO_BE_SENT','2014-11-28 17:58:56',NULL,NULL,NULL),(58,1,'<p>aaaaaaa</p>\r\n','TO_BE_SENT','2014-11-28 18:03:45',NULL,NULL,NULL),(60,1,'<p>sssssss</p>\r\n','TO_BE_SENT','2014-11-28 18:04:37',NULL,NULL,NULL),(62,1,'','TO_BE_SENT','2014-11-29 16:33:03',NULL,NULL,NULL),(63,1,'','TO_BE_SENT','2014-11-29 16:41:17',NULL,NULL,NULL),(64,1,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 16:56:06',1,'2014-11-30 16:56:06',1),(65,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 15:17:16',NULL,NULL,NULL),(66,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 15:19:15',NULL,NULL,NULL),(67,1,'<p>231123123123</p>\r\n','TO_BE_SENT','2014-11-30 15:19:32',NULL,NULL,NULL),(68,1,'<p>231123123123</p>\r\n','TO_BE_SENT','2014-11-30 15:22:35',NULL,NULL,NULL),(69,1,'<p>231123123123</p>\r\n','TO_BE_SENT','2014-11-30 16:55:58',1,'2014-11-30 16:55:58',1),(70,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 16:50:49',1,NULL,NULL),(71,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 16:54:10',1,NULL,1),(72,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 16:55:06',1,NULL,1),(73,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 16:55:35',1,'2014-11-30 16:55:35',1),(75,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 17:30:08',37,'2014-11-30 17:30:08',37),(76,1,'<p>231123123123</p>\r\n','TO_BE_SENT','2014-11-30 17:59:34',37,'2014-11-30 17:59:34',37),(77,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 17:47:13',37,'2014-11-30 17:47:13',37),(78,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 18:01:00',37,'2014-11-30 18:01:00',37),(79,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 18:03:22',37,'2014-11-30 18:03:22',37),(80,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 18:04:38',37,'2014-11-30 18:04:38',37),(81,3,'<p><s>2311</s><strong>231</strong>23<em>123</em></p>\r\n\r\n<ul>\r\n	<li><em>asdasdasd</em></li>\r\n	<li><em>asdasdas</em></li>\r\n	<li><em>asdasd</em></li>\r\n</ul>\r\n','TO_BE_SENT','2014-11-30 18:05:55',37,'2014-11-30 18:05:55',37);
 
 /*Table structure for table `permission_type` */
 
@@ -253,11 +257,11 @@ CREATE TABLE `user_permissions` (
   `user` int(11) DEFAULT NULL,
   `permission` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_permissions` */
 
-insert  into `user_permissions`(`id`,`user`,`permission`) values (7,1,'manage_newsletters'),(8,1,'manage_customers'),(9,1,'manage_messages'),(10,1,'manage_crmusers'),(11,1,'manage_appointments'),(17,37,'manage_newsletters'),(18,37,'manage_customers'),(20,37,'manage_appointments'),(21,37,'manage_messages');
+insert  into `user_permissions`(`id`,`user`,`permission`) values (7,1,'manage_newsletters'),(8,1,'manage_customers'),(9,1,'manage_messages'),(10,1,'manage_crmusers'),(11,1,'manage_appointments'),(17,37,'manage_newsletters'),(18,37,'manage_customers'),(20,37,'manage_appointments'),(21,37,'manage_messages'),(22,37,'manage_crmusers');
 
 /*Table structure for table `users` */
 
@@ -290,7 +294,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`type`,`firstname`,`lastname`,`dateofbirth`,`gender`,`occupation`,`smoker`,`homeaddress`,`businessaddress`,`nric`,`notes`,`group`,`profilephoto`,`phone`,`email`,`username`,`password`,`lastlogin`,`enabled`,`isAdmin`) values (1,'crmuser','System','',NULL,'','','N','','','','',NULL,'attachments/avatar.png',NULL,NULL,'admin','21232f297a57a5a743894a0e4a801fc3',NULL,1,1),(2,'customer','pippo','pippo','1979-06-04','M','Developer','Y','bbbbb','bbbbb','12345','aaa',9,'attachments/avatar2.png',NULL,'aaaaa',NULL,NULL,NULL,1,0),(37,'crmuser','Antonio','Esposito','1970-01-01','','','','','','','',0,'attachments/avatar5.png',NULL,'esp.antonio@gmail.com','aesposito','4a181673429f0b6abbfd452f0f3b5950',NULL,1,0);
+insert  into `users`(`id`,`type`,`firstname`,`lastname`,`dateofbirth`,`gender`,`occupation`,`smoker`,`homeaddress`,`businessaddress`,`nric`,`notes`,`group`,`profilephoto`,`phone`,`email`,`username`,`password`,`lastlogin`,`enabled`,`isAdmin`) values (1,'crmuser','System','',NULL,'','','N','','','','',NULL,'attachments/avatar.png',NULL,NULL,'admin','21232f297a57a5a743894a0e4a801fc3',NULL,1,1),(2,'customer','pippo','pippo','1979-06-04','M','Developer','Y','bbbbb','bbbbb','12345','aaa',9,'attachments/avatar2.png',NULL,'esp.antonio@gmail.com',NULL,NULL,NULL,1,0),(37,'crmuser','Antonio','Esposito','1970-01-01','','','','','','','',0,'attachments/avatar5.png',NULL,'esp.antonio@gmail.com','aesposito','4a181673429f0b6abbfd452f0f3b5950',NULL,1,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

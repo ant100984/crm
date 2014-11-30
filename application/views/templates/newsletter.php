@@ -3,6 +3,17 @@
 		<form role="form" action="<?php echo base_url() . "/index.php/newsletter/saveNewsletter"; ?>" method="post" enctype="multipart/form-data">
 			<input type="hidden" id="newsletter_id" name="newsletter_id" value="<?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->id; ?>"/>
 			<div class="box-body">
+				<span class="pull-right">
+					<?php 
+						if(!empty($loaded_newsletter->id)) 
+							if($loaded_newsletter->status == "DRAFT") 
+								echo "Status: <span class='badge'>".$loaded_newsletter->status."</span> last modified by <strong>".$loaded_newsletter->usercreated." ".$loaded_newsletter->dtmcreated."</strong>";
+							else if($loaded_newsletter->status == "TO BE SENT") 
+									echo "Status: <span class='badge bg-blue'>".$loaded_newsletter->status."</span> by <strong>".$loaded_newsletter->usersent." ".$loaded_newsletter->dtmsent."</strong>";
+								else if($loaded_newsletter->status == "SENT") 
+									echo "Status: <span class='badge bg-green'>".$loaded_newsletter->status."</span> by <strong>".$loaded_newsletter->usersent." ".$loaded_newsletter->dtmsent."</strong>";
+					?>
+				</span>
 				<?php
 					$editable = false;
 					if(empty($loaded_newsletter->id) || ($loaded_newsletter->status == "DRAFT")){
@@ -17,8 +28,8 @@
 				<?php
 					}
 				?>
-				<div class="form-group">
-					<label for="template">Templates</label>
+				<label for="template">Templates</label>
+				<div class="input-group">
 					<select name="template" id="template" class="form-control" <?php if(!$editable) echo "disabled"; ?>>
 						<option value="" ></option>
 						<?php foreach($templates as $template){
@@ -26,8 +37,13 @@
 						}
 						?>
 					</select>
+					<div class="input-group-btn">
+					
+						<a id="load_template" name="load_template" role="button" class="btn btn-info <?php if(!$editable) echo "disabled"; ?>" >Load Template</a>
+					
+					</div>
 				</div>
-										
+			
 			</div><!-- /.box-body -->
 
 			<div class='box'>
@@ -39,15 +55,17 @@
 					</div><!-- /. tools -->
 				</div><!-- /.box-header -->
 				<div class='box-body pad'>
-					<!-- style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" -->
+					
 					<textarea <?php if(!$editable) echo "disabled"; ?> name="newsletter_body" id="newsletter_body" class="textarea"><?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->body; ?></textarea>
 					
-					<input <?php if(!$editable) echo "disabled"; ?> class="form-control" type="text" id="template_title" name="template_title" placeholder="Enter a title..."/>
+					<input disabled="true" class="form-control" type="text" id="template_title" required name="template_title" placeholder="Enter a title..."/>
 					<label>
 						<input <?php if(!$editable) echo "disabled"; ?> type="checkbox" id="save_as_template" name="save_as_template"/>
 						Save as template
 					</label>
 				</div>
+				<div class="overlay body-overlay" style="display: none;"></div>
+				<div class="loading-img body-loading-img" style="display: none;"></div>
 			</div>
 			<div class="box">
 				<div class="box-header">
@@ -136,6 +154,34 @@
 	$(function() {
 		
 		CKEDITOR.replace('newsletter_body');
+		
+		$('#save_as_template').on('ifChecked', function(event){
+			$('#template_title').prop('disabled', false);
+		});
+			
+		$('#save_as_template').on('ifUnchecked', function(event){
+			$('#template_title').prop('disabled', true);
+			$('#template_title').val("");
+		});
+		
+		$("#load_template").click(function(){
+			var val = $("#template").val();
+			
+			$.ajax({
+			  type: "POST",
+			  url: "<?php echo base_url() . "/index.php/newsletter/loadTemplate"; ?>",
+			  data: {id: val},
+			  beforeSend: function(){
+				$('.body-overlay').show();
+				$('.body-loading-img').show();
+			  }
+			}).done(function(data) {
+				
+				CKEDITOR.instances["newsletter_body"].setData(data);
+				$('.body-overlay').hide();
+				$('.body-loading-img').hide();
+			});
+		});
 		
 	});
         

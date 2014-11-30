@@ -25,9 +25,10 @@ class Login extends CI_Controller {
 		}else{
 			
 			$this->session->set_userdata('permissions', $this->users_model->getUserPermissionsArray($result->id)); 
-			$this->session->set_userdata('username',$result->username);
-			$this->session->set_userdata('display_name',$result->firstname);
-			$this->session->set_userdata('userid',$result->id);
+			$this->session->set_userdata('username', $result->username);
+			$this->session->set_userdata('display_name', $result->firstname);
+			$this->session->set_userdata('userid', $result->id);
+			$this->session->set_userdata('isadmin', $result->isAdmin);
 			redirect('welcome');
 			
 		}

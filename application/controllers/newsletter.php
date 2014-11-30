@@ -10,6 +10,7 @@ class Newsletter extends MY_Controller {
 		$this->load->model('groups_model');
 		$this->load->helper('url');
 		$this->load->helper('date');
+		$this->load->library('session');
 		$data['menu_active'] = "messaging";
 		$this->load->vars($data);		
 	}
@@ -54,24 +55,51 @@ class Newsletter extends MY_Controller {
 		
 	}
 	
+	public function archive(){
+		$data['location'] = "Newsletters Archive";
+		
+		$data["newsletters"] = $this->newsletter_model->getNewsletter();
+		
+		$this->load->vars($data);
+		
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu');
+		$this->load->view('templates/newsletter_list');
+		$this->load->view('templates/footer');
+	}
+	
 	public function saveNewsletter(){
-		error_log(print_r($_POST, true));
+		$newsletter_id = $this->input->post('newsletter_id');
 		
 		if($this->input->post('send') == "SEND"){
-			$status = "TO_BE_SENT";
-			$statusDisplay = "TO BE SENT";
+		
+			$customers = $this->newsletter_model->getNewsletterCustomers($newsletter_id);
+		
+			if(sizeof($customers) > 0){
+				$status = "TO_BE_SENT";
+				$statusDisplay = "TO BE SENT";
+				
+				$data['warning_messages'][] = "Newsletter scheduled to be sent. The dispatch process will start shortly.";
+			}else{
+				$status = "DRAFT";
+				$statusDisplay = "DRAFT";
+				
+				$data['error_messages'][] = "Newsletter not sent, you should add at least one customer to send the newsletter.";
+			}
+			
 		}else{
 			$status = "DRAFT";
 			$statusDisplay = "DRAFT";
 		}
 		
-		$newsletter_id = $this->input->post('newsletter_id');
+		$user = $this->session->userdata('userid');
+				
 		$template_id = $this->input->post('template');
 		$newsletter_body = $this->input->post('newsletter_body');
 		
 		$upload = $this->input->post('upload');
 		
-		$newsletter_id = $this->newsletter_model->saveNewsletter(empty($newsletter_id) ? FALSE : $newsletter_id, empty($template_id) ? FALSE : $template_id, $newsletter_body, $status);
+		$newsletter_id = $this->newsletter_model->saveNewsletter(empty($newsletter_id) ? FALSE : $newsletter_id, empty($template_id) ? FALSE : $template_id, $newsletter_body, $status, $user);
 		
 		$template_title = $this->input->post('template_title');
 		$save_as_template = $this->input->post('save_as_template');
@@ -135,4 +163,19 @@ class Newsletter extends MY_Controller {
 		$this->index($newsletter_id);
 		
 	}
+	
+	public function loadTemplate(){
+		$id = $this->input->post("id");
+		$template = $this->newsletter_model->getTemplates($id);
+		
+		echo $template->body;
+	}
+	
+	public function delete($newsletterid){
+		$this->newsletter_model->deleteNewsletter($newsletterid);
+		$data["success_messages"][] = "DRAFT Newsletter deleted successfully";
+		$this->load->vars($data);
+		$this->archive();
+	}
+	
 }

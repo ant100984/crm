@@ -17,6 +17,7 @@ class Crmusers extends MY_Controller {
 		
 		$logged_user = $this->session->userdata('userid');
 		$user_permissions = $this->session->userdata('permissions');
+		$isadmin = $this->session->userdata('isadmin');
 		
 		if(!in_array("manage_crmusers", $user_permissions) && ($userid != $logged_user)){
 			$data["error_messages"][] = "You don't have the rights to access this page";
@@ -29,7 +30,7 @@ class Crmusers extends MY_Controller {
 			return;
 		}
 		
-		$data['users'] = $this->users_model->loadUsers(FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,"crmuser");
+		$data['users'] = $this->users_model->loadUsers(FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,"crmuser",$isadmin);
 		
 		$data['permission_type'] = $this->users_model->loadPermissionType();
 		

@@ -91,8 +91,8 @@
 							foreach($users as $user){ 
 								echo "<tr>";
 								echo "<td style='width: 10%; vertical-align: middle !important;'><img src='".base_url().(!empty($user->profilephoto) ? $user->profilephoto : 'img/no_image.png')."' class='img-circle'/></td>";
-								echo "<td style='width: 70%; vertical-align: middle !important;'>".$user->firstname . " " . $user->lastname ."</td>";
-								echo "<td style='width: 20%; vertical-align: middle !important;'>";
+								echo "<td style='width: 60%; vertical-align: middle !important;'>".$user->firstname . " " . $user->lastname ."</td>";
+								echo "<td style='width: 30%; vertical-align: middle !important;'>";
 								echo "<a href='".base_url()."index.php/crmusers/index/".$user->id."' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Edit</a>";
 								echo "<a href='".base_url()."index.php/crmusers/deleteUser/".$user->id."' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
 								echo "</td>";

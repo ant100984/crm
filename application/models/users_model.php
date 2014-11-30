@@ -22,9 +22,7 @@ class Users_model extends CI_Model {
 			return $query->row();
 		}else{
 			
-			if($admin !== FALSE)
-				$this->db->where("u.isAdmin = {$admin}");
-			else
+			if($admin === FALSE || $admin == 0)
 				$this->db->where("u.isAdmin = 0");
 			
 			if($firstname !== FALSE)
@@ -43,7 +41,7 @@ class Users_model extends CI_Model {
 				$this->db->where("u.smoker = '{$smoker}'");
 			
 			$this->db->where("u.type = '{$type}'");
-				
+			
 			$query = $this->db->get();
 			return $query->result();
 		}

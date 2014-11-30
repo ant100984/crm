@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>My Customer Relationship Manager</title>
+        <title>Jsetec Customer Relationship Manager</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -43,14 +43,14 @@
 		<script src="<?php echo base_url();?>js/plugins/waypoints/waypoints.min.js" type="text/javascript"></script>
 		
 		<!-- CK editor -->
-		<script src="//cdn.ckeditor.com/4.4.5/full/ckeditor.js"></script>
+		<script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
     </head>
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
             <a href="<?php echo base_url();?>index.php" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                My CRM
+                JsetecCRM
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">

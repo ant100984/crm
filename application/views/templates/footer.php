@@ -37,7 +37,7 @@
 		<script type="text/javascript">
 			$(function(){
 				//after 5 seconds after the page loaded, we close the error and success messages
-				$('.outcome_message').delay(5000).slideUp("slow");
+				$('.outcome_message').delay(10000).slideUp("slow");
 			});
 		</script>
 			

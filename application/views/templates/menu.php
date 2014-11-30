@@ -46,7 +46,7 @@
 						<?php } ?>
 						<?php if(in_array("manage_newsletters",$user_permissions)){ ?>
 							<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Create Newsletter</a></li>
-							<li><a href="<?php echo base_url();?>index.php/newsletter"><i class="fa fa-angle-double-right"></i>Newsletters Archive</a></li>
+							<li><a href="<?php echo base_url();?>index.php/newsletter/archive"><i class="fa fa-angle-double-right"></i>Newsletters Archive</a></li>
 						<?php } ?>
 					</ul>
 				</li>
@@ -83,6 +83,21 @@
 				
 				<!-- Main content -->
                 <section class="content">
+					
+					<?php
+						if(!empty($warning_messages))
+							foreach($warning_messages as $warning){
+								echo "<div class='row outcome_message'>";
+									echo "<div class='col-md-6'>";
+										echo "<div class='alert alert-warning alert-dismissable'>";
+											echo "<i class='fa fa-ban'></i>";
+											echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";
+											echo $warning;
+										echo "</div>";
+									echo "</div>";
+								echo "</div>";
+							}
+					?>
 					
 					<?php
 						if(!empty($error_messages))
