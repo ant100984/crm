@@ -267,7 +267,7 @@
 		$("#dob").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 		$("#policy_date").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 		
-		$("#dob").datepicker();
-		$("#policy_date").datepicker();
+		$("#dob").datepicker({format: 'dd/mm/yyyy'});
+		$("#policy_date").datepicker({format: 'dd/mm/yyyy'});
 	});
 </script>

@@ -59,19 +59,19 @@
 						<label for="alert">Alert</label>
 						<select id="alert" name="alert" class="form-control">
 							<option value="" <?php if(empty($loaded_appointment->alert)) echo "selected"; ?>>Do not alert me</option>
-							<option value="30m" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '30m') echo "selected"; ?>>30 minutes before</option>
-							<option value="1h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '1h') echo "selected"; ?>>1 hour before</option>
-							<option value="2h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '2h') echo "selected"; ?>>2 hours before</option>
-							<option value="3h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '3h') echo "selected"; ?>>3 hours before</option>
-							<option value="4h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '4h') echo "selected"; ?>>4 hours before</option>
-							<option value="5h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '5h') echo "selected"; ?>>5 hours before</option>
-							<option value="6h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '6h') echo "selected"; ?>>6 hours before</option>
-							<option value="7h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '7h') echo "selected"; ?>>7 hours before</option>
-							<option value="8h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '8h') echo "selected"; ?>>8 hours before</option>
-							<option value="9h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '9H') echo "selected"; ?>>9 hours before</option>
-							<option value="10h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '10h') echo "selected"; ?>>10 hours before</option>
-							<option value="11h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '11h') echo "selected"; ?>>11 hours before</option>
-							<option value="12h" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '12h') echo "selected"; ?>>12 hours before</option>
+							<option value="30" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '30') echo "selected"; ?>>30 minutes before</option>
+							<option value="60" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '60') echo "selected"; ?>>1 hour before</option>
+							<option value="120" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '120') echo "selected"; ?>>2 hours before</option>
+							<option value="180" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '180') echo "selected"; ?>>3 hours before</option>
+							<option value="240" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '240') echo "selected"; ?>>4 hours before</option>
+							<option value="300" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '300') echo "selected"; ?>>5 hours before</option>
+							<option value="360" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '360') echo "selected"; ?>>6 hours before</option>
+							<option value="420" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '420') echo "selected"; ?>>7 hours before</option>
+							<option value="480" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '480') echo "selected"; ?>>8 hours before</option>
+							<option value="540" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '540') echo "selected"; ?>>9 hours before</option>
+							<option value="600" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '600') echo "selected"; ?>>10 hours before</option>
+							<option value="660" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '660') echo "selected"; ?>>11 hours before</option>
+							<option value="720" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '720') echo "selected"; ?>>12 hours before</option>
 						</select>
 					</div>
 					<div class="form-group">

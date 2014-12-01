@@ -154,4 +154,22 @@ class Newsletter_model extends CI_Model {
 		$this->db->delete('newsletters', array('id' => $newsletterid)); 
 		$this->deleteAllNewsletterCustomers($newsletterid);
 	}
+	
+	public function updateNewsletterCustomerStatus($id,$status){
+		$data = array(
+			"status" => $status
+		);
+		
+		$this->db->where("id",$id);
+		$this->db->update("newsletter_customer", $data);
+	}
+	
+	public function updateNewsletterStatus($newsletterid, $status){
+		$data = array(
+			"status" => $status
+		);
+		
+		$this->db->where("id",$newsletterid);
+		$this->db->update("newsletters", $data);
+	}
 }	

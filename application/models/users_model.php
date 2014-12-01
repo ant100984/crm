@@ -215,4 +215,13 @@ class Users_model extends CI_Model {
 		
 		return $result;
 	}
+	
+	public function getAdmins(){
+		$this->db->select("*");
+		$this->db->from("users u");
+		$this->db->where("u.isAdmin","1");
+		
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

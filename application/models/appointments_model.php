@@ -90,4 +90,24 @@ class Appointments_model extends CI_Model {
 		
 		return $query->result();
 	}
+	
+	public function getAppointmentsToAlert(){
+		$this->db->select('u.firstname, u.lastname, DATE_FORMAT(a.start_date,"%Y/%m/%d %H:%i") as start_date, DATE_FORMAT(a.end_date,"%Y/%m/%d %H:%i") as end_date, a.subject, a.message, a.location', FALSE);
+		$this->db->from("appointments a");
+		$this->db->join("users u","u.id = a.user_id");
+		$this->db->where("DATE_ADD(a.start_date,INTERVAL -1*a.alert MINUTE) <= SYSDATE()");
+		$this->db->where("a.alerted","0");
+		
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	public function updateAppointmentAlerted($id){
+		$data = array(
+			"alerted" => 1
+		);
+		
+		$this->db->where("a.id", $id);
+		$this->db->update("appointments a", $data);
+	}
 }

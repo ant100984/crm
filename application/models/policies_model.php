@@ -78,4 +78,13 @@ class Policies_model extends CI_Model {
 	public function deletePolicy($id){
 		$this->db->delete('policies', array('id' => $id)); 
 	}
+	
+	public function updatePoliciesStatus(){
+			
+		$this->db->query('UPDATE policies p 
+						    JOIN policies_reminder pr ON pr.code = p.reminder
+							 SET p.status = "UPD", p.date = DATE_ADD(p.date,INTERVAL pr.duration_entity MONTH)
+						   WHERE p.status = "PD"
+							 AND DATE_ADD(p.date,INTERVAL pr.duration_entity MONTH) <= DATE(SYSDATE())');
+	}
 }
