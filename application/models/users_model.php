@@ -89,7 +89,7 @@ class Users_model extends CI_Model {
 	}
 	
 	public function saveCustomer($profile_photo=FALSE, $customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,$username,$password){
-		return $this->saveUser($profile_photo,$customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,"customer");
+		return $this->saveUser($profile_photo,$customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,"customer",$username,$password);
 	}
 	
 	public function saveUser($profile_photo=FALSE, $customer_id,$dob,$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,$type,$username,$password){
@@ -142,7 +142,18 @@ class Users_model extends CI_Model {
 	}
 	
 	public function deleteUser($userid){
+		$this->db->delete('users', array('id' => $userid));	
+	}
+	
+	public function deleteCustomer($userid){
 		$this->db->delete('users', array('id' => $userid)); 
+		$this->db->delete('appointments', array('user_id' => $userid));
+		$this->db->delete('attachments', array('user_id' => $userid));
+		$this->db->delete('messages', array('sender' => $userid));
+		$this->db->delete('messages', array('receiver' => $userid));
+		$this->db->delete('newsletter_customer', array('customer' => $userid));
+		$this->db->delete('policies', array('user_id' => $userid));
+		$this->db->delete('user_permissions', array('user' => $userid));
 	}
 	
 	public function checkLogin($username,$password){

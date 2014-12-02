@@ -180,9 +180,10 @@ class Customers extends MY_Controller {
 			$this->load->library('upload', $config);
 		   
 			if(!$this->upload->do_upload("profile_photo")){
-				$error = array('error' => $this->upload->display_errors());
-				$data['error_messages'][] = "An error has occurred during the operation";
-							
+				$errors = $this->upload->display_errors('<p>','</p>');
+				$msg = "An error has occurred during the operation: " . $errors;
+				
+				$data['error_messages'][] = $msg;							
 			}else{
 				$upload_data = array('upload_data' => $this->upload->data());
 				$profile_photo = $this->config->item('attachments_folder')."/".$upload_data['upload_data']['file_name'];
@@ -215,8 +216,10 @@ class Customers extends MY_Controller {
 		$this->load->library('upload', $config);
 	   
 		if(!$this->upload->do_upload("attachment")){
-			$error = array('error' => $this->upload->display_errors());
-			$data['error_messages'][] = "An error has occurred during the operation";
+			$errors = $this->upload->display_errors('<p>','</p>');
+			$msg = "An error has occurred during the operation: " . $errors;
+			
+			$data['error_messages'][] = $msg;
 		}else{
 			$upload_data = array('upload_data' => $this->upload->data());
 			$data['success_messages'][] = "Operation successfully completed";
@@ -230,5 +233,12 @@ class Customers extends MY_Controller {
 		$this->users_model->deleteAttachment($id);
 		$data['success_messages'][] = "Operation successfully completed";
 		$this->getCustomer($customer);
+	}
+	
+	public function deleteCustomer($customer){
+		$this->users_model->deleteCustomer($customer);
+		$data['success_messages'][] = "Operation successfully completed";
+		$this->load->vars($data);
+		$this->index();
 	}
 }

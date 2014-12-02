@@ -86,7 +86,7 @@
 							}else
 								echo "<a href='".base_url()."/index.php/customers/setCustomerEnabled/".$customer->id."/1' class='btn btn-xs btn-success' role='button'><span class='fa fa-unlock'></span> Enable</a>";
 								
-							echo "<a href='".base_url()."/index.php/customers/deleteCustomer/".$customer->id."' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
+							echo "<a href='".base_url()."/index.php/customers/deleteCustomer/".$customer->id."' class='btn btn-xs btn-danger' onclick='return askConfirm();' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
 						echo "</td>";
 					}
 				echo "</tr>";
@@ -97,6 +97,11 @@
 
 	<script type="text/javascript">
 
+		function askConfirm(){
+			var result = confirm("Are you sure? The operation is not reversible.");
+			return result;
+		}
+		
 		$(function(){
 			
 			$('#add_selected').click(function(){

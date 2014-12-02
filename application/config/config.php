@@ -14,7 +14,10 @@
 | path to your installation.
 |
 */
+//$config['base_url']	= 'http://localhost/JsetecCRM/';
+
 $config['base_url']	= 'http://localhost:90/crm/';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -360,6 +363,9 @@ $config['root_path'] = dirname(dirname(dirname(__DIR__)));
 $config['attachments_folder'] = "attachments";
 $config['attachments_full_path'] = $config['root_path'] . DIRECTORY_SEPARATOR . "crm" . DIRECTORY_SEPARATOR . $config['attachments_folder'];
 $config['crm_folder'] = $config['root_path'] . DIRECTORY_SEPARATOR . "crm";
+
+//$config['attachments_full_path'] = $config['root_path'] . DIRECTORY_SEPARATOR . "JsetecCRM" . DIRECTORY_SEPARATOR . $config['attachments_folder'];
+//$config['crm_folder'] = $config['root_path'] . DIRECTORY_SEPARATOR . "JsetecCRM";
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
