@@ -131,7 +131,7 @@ class Users_model extends CI_Model {
 		$data = array(
 			'attachment_name' => $name,
 			'attachment_path' => $path,
-			'user_id' => $customer
+			'user_id' => $user
 		);
 		
 		$this->db->insert('attachments', $data); 
