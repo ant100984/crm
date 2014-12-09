@@ -35,7 +35,7 @@
 			<h4 class="modal-title" id="myModalLabel">Edit Group</h4>
 		  </div>
 		  <form method="post" action="<?php echo base_url() . "/index.php/groups/saveGroup"; ?>">
-			<input type="hidden" name="group_id" id="group_id" value="<?php echo $group_to_show->id; ?>"/>
+			<input type="hidden" name="group_id" id="group_id" value="<?php if(!empty($group_to_show)) echo $group_to_show->id; ?>"/>
 			<div class="modal-body">
 				<div class="form-group">
 					<label for="group_name">Group Name</label>
@@ -60,13 +60,14 @@
 						echo "<li class='".($group_to_show->id == $group->id ? "active" : "")."'><a href='".base_url()."/index.php/groups/index/".$group->id."'>".$group->group_name."</a></li>";
 					}
 				?>
-				<!--
-				<li class="<?php if($group_to_show->id == -1) echo "active"; ?>"><a href="<?php echo base_url().'/index.php/groups/index/-1'; ?>">Ungrouped</a></li>
-				-->
-				<li class="pull-right"><a href="<?php echo base_url().'/index.php/groups/deleteGroup/'.$group_to_show->id; ?>" class="text-muted"><i class="fa fa-trash-o"></i></a></li>
+				<?php if(!empty($group_to_show)){ ?>
+						<li class="pull-right"><a href="<?php echo base_url().'/index.php/groups/deleteGroup/'.$group_to_show->id; ?>" class="text-muted"><i class="fa fa-trash-o"></i></a></li>
+				<?php } ?>
 				<li class="pull-right"><a href="#" class="text-muted" data-toggle="modal" data-target="#new_group"><i class="fa fa-plus-square"></i></a></li>
-				<li class="pull-right"><a href="#" class="text-muted" data-toggle="modal" data-target="#edit_group"><i class="fa fa-pencil"></i></a></li>
 				
+				<?php if(!empty($group_to_show)){ ?>
+					<li class="pull-right"><a href="#" class="text-muted" data-toggle="modal" data-target="#edit_group"><i class="fa fa-pencil"></i></a></li>
+				<?php } ?>
 			</ul>
 			<div class="tab-content">
 				<?php

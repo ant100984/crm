@@ -91,8 +91,6 @@ class Customers extends MY_Controller {
 		$group = $this->input->post('group');
 		$smoker = $this->input->post('smoker');
 		
-		error_log($firstname." ".$lastname." ".$gender." ".$group." ".$smoker);
-		
 		$data['customers'] = $this->users_model->loadCustomers(FALSE, empty($firstname) ? FALSE : $firstname, empty($lastname) ? FALSE : $lastname, empty($gender) ? FALSE : $gender, empty($group) ? FALSE : $group, empty($smoker) ? FALSE : $smoker);
 		$data['groups'] = $this->groups_model->getGroups();
 		$data['filter_firstname'] = $firstname;

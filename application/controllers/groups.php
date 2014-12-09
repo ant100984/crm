@@ -17,14 +17,16 @@ class Groups extends MY_Controller {
 		$data['location'] = "Manage Groups";
 		$data['groups'] = $this->groups_model->getGroups();
 	
-		if($group === FALSE)
+		if($group === FALSE && sizeof($data['groups']) > 0)
 			$group = $data['groups'][0];
 		else
 			$group = $this->groups_model->getGroups($group);
 		
-		$data['customers'] = $this->users_model->loadCustomers(FALSE,FALSE,FALSE,FALSE, $group->id);
-		$data['group_to_show'] = $group;
-	
+		if(!empty($group)){
+			$data['customers'] = $this->users_model->loadCustomers(FALSE,FALSE,FALSE,FALSE, $group->id);
+			$data['group_to_show'] = $group;
+		}
+		
 		$this->load->vars($data);
 		
 		$this->load->view('templates/header');

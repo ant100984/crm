@@ -367,5 +367,12 @@ $config['crm_folder'] = $config['root_path'] . DIRECTORY_SEPARATOR . "crm";
 //$config['attachments_full_path'] = $config['root_path'] . DIRECTORY_SEPARATOR . "JsetecCRM" . DIRECTORY_SEPARATOR . $config['attachments_folder'];
 //$config['crm_folder'] = $config['root_path'] . DIRECTORY_SEPARATOR . "JsetecCRM";
 
+/* Application settings */
+
+$config['max_appointments_number'] = 4;
+$config['max_remarks_appointment'] = 1;
+
+/* end application settings */
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

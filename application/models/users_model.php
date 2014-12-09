@@ -42,6 +42,9 @@ class Users_model extends CI_Model {
 			
 			$this->db->where("u.type = '{$type}'");
 			
+			$this->db->order_by("u.firstname","asc");
+			$this->db->order_by("u.lastname","asc");
+			
 			$query = $this->db->get();
 			return $query->result();
 		}

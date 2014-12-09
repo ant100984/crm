@@ -60,9 +60,11 @@
 					</a>
 					<ul class="treeview-menu">
 						<li><a href="<?php echo base_url();?>index.php/appointments/getAppointment"><i class="fa fa-angle-double-right"></i> Manage Appointments</a></li>
-					</ul>
+						<li><a href="<?php echo base_url();?>index.php/appointments/getRemarksCustomers"><i class="fa fa-angle-double-right"></i> Remarks list</a></li>
+					</ul>					
 				</li>
-				<?php } ?>
+				
+				<?php } ?>				
 			</ul>
 		</section>
 		<!-- /.sidebar -->

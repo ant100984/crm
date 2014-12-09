@@ -12,10 +12,10 @@ class Appointments_model extends CI_Model {
 		$this->db->join('users u','u.id = a.user_id');
   
 		if($user !== FALSE)
-			$this->db->where("a.customer_id = '{$user}'");
+			$this->db->where("a.user_id", $user);
 		
 		if($appointment !== FALSE){
-			$this->db->where("a.id = {$appointment}");
+			$this->db->where("a.id",$appointment);
 			$query = $this->db->get();
 			return $query->row();
 		}
@@ -109,5 +109,15 @@ class Appointments_model extends CI_Model {
 		
 		$this->db->where("a.id", $id);
 		$this->db->update("appointments a", $data);
+	}
+	
+	public function loadRemarksCustomers(){
+		$this->db->select('date_format(a.start_date,"%d/%m/%y %h:%i") as start_date, ar.notes', FALSE);
+		$this->db->from('appointments a');
+		$this->db->join("appointments_remarks ar", "ar.appointment_id = a.id");
+		$this->db->order_by("a.start_date", "asc");
+		
+		$query = $this->db->get();
+		return $query->result();
 	}
 }
