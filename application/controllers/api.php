@@ -36,7 +36,7 @@ class Api extends CI_Controller {
 			$result['result'] = "KO";
 			$result['error'] = "Authentication failed";
 		}else{
-			$messages = $this->messages_model->getMessages($user->id, FALSE, FALSE, FALSE, FALSE);
+			$messages = $this->messages_model->getMessages($user->id, FALSE, FALSE, FALSE, FALSE, "asc");
 			$result["result"] = "OK";
 			$result["messages"] = $messages;
 		}
