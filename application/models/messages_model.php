@@ -7,7 +7,7 @@ class Messages_model extends CI_Model {
 		
 	}
 	
-	public function getMessages($user_id = FALSE, $status = FALSE, $direction = FALSE, $group = FALSE, $unread = FALSE, $dateOrder = "desc"){
+	public function getMessages($user_id = FALSE, $status = FALSE, $direction = FALSE, $group = FALSE, $unread = FALSE, $dateOrder = "asc"){
 	
 		$this->db->select('IF(m.dateread IS NULL,0,1) AS msg_read, m.id, us.firstname as sender_firstname, us.lastname as sender_lastname, us.type as sender_type, us.profilephoto as sender_photo, ur.firstname as receiver_firstname, ur.lastname as receiver_lastname, ur.profilephoto as receiver_photo, ur.type as receiver_type, m.messagetext, date_format(m.datesent,"%d/%m/%Y %H:%i:%s") as datesent', FALSE);
 		$this->db->from('messages m');

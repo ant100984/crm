@@ -95,7 +95,7 @@ class Appointments_model extends CI_Model {
 		$this->db->select('u.firstname, u.lastname, DATE_FORMAT(a.start_date,"%Y/%m/%d %H:%i") as start_date, DATE_FORMAT(a.end_date,"%Y/%m/%d %H:%i") as end_date, a.subject, a.message, a.location', FALSE);
 		$this->db->from("appointments a");
 		$this->db->join("users u","u.id = a.user_id");
-		$this->db->where("DATE_ADD(a.start_date,INTERVAL -1*a.alert MINUTE) <= SYSDATE()");
+		$this->db->where("a.alert IS NOT NULL AND a.alert <> -1 AND DATE_ADD(a.start_date,INTERVAL -1*a.alert MINUTE) <= SYSDATE()");
 		$this->db->where("a.alerted","0");
 		
 		$query = $this->db->get();
@@ -111,10 +111,13 @@ class Appointments_model extends CI_Model {
 		$this->db->update("appointments a", $data);
 	}
 	
-	public function loadRemarksCustomers(){
+	public function loadRemarksCustomers($customer_id=FALSE){
 		$this->db->select('date_format(a.start_date,"%d/%m/%y %h:%i") as start_date, ar.notes', FALSE);
 		$this->db->from('appointments a');
 		$this->db->join("appointments_remarks ar", "ar.appointment_id = a.id");
+		
+		$this->db->where("a.user_id",$customer_id);
+		
 		$this->db->order_by("a.start_date", "asc");
 		
 		$query = $this->db->get();

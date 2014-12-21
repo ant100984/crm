@@ -115,4 +115,15 @@ class Crmusers extends MY_Controller {
 		$this->users_model->deleteUser($userid);
 		$this->index();
 	}
+	
+	public function getUnreadNotifications(){
+		$notifications = $this->users_model->getUserNotifications();
+		
+		$data['notifications'] = $notifications;
+		$data['num_notifications'] = sizeof($notifications);
+		
+		$this->load->vars($data);
+		
+		$this->load->view('templates/unreadNotifications');
+	}
 }

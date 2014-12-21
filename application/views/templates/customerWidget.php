@@ -77,22 +77,36 @@
 		
 	}
 	
+	function scrollMessagesToBottom(force){
+		setTimeout(function(){
+			var messageThread = document.getElementById('messages_list');
+			
+			if (force || (messageThread.scrollHeight - $(messageThread).scrollTop() <= $(messageThread).outerHeight() + 400)){
+				messageThread.scrollTop = messageThread.scrollHeight;
+			}
+			
+		}, 50);
+	}
+	
 	function filterMessages(){
 		var val = $('#customer_id').val();
-				
+		
 		$.ajax({
 		  type: "POST",
 		  url: "<?php echo base_url() . "/index.php/messages/filterMessages"; ?>",
 		  data: {user_id: val},
 		  beforeSend: function(){
 			$.waypoints('destroy');
-			$('#messages_list').scrollTop(0);
+			//$('#messages_list').scrollTop(0);
 			
 			$('.messages_overlay').show();
 			$('.messages_loading').show();
 		  }
 		}).done(function(data) {
 			$('#messages_list').html(data);
+			
+			scrollMessagesToBottom();
+			
 			$('.messages_overlay').hide();
 			$('.messages_loading').hide();
 		

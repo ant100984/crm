@@ -189,6 +189,9 @@ class Customers extends MY_Controller {
 	
 		}
 		
+		if(empty($customer_id))
+			$this->users_model->insertNotification("New customer added : " . $firstname . " " . $lastname);
+		
 		$this->users_model->saveCustomer($profile_photo,$customer_id,$dob[2]."-".$dob[1]."-".$dob[0],$firstname,$lastname,$group,$gender,$occupation,$smoker,$email,$home_address,$business_address,$nric,$notes,"customer",$username,$password);
 		
 		$data['success_messages'][] = "Operation successfully completed";

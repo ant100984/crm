@@ -58,7 +58,7 @@
 					<div class="form-group">
 						<label for="alert">Alert</label>
 						<select id="alert" name="alert" class="form-control">
-							<option value="" <?php if(empty($loaded_appointment->alert)) echo "selected"; ?>>Do not alert me</option>
+							<option value="-1" <?php if(empty($loaded_appointment->alert) || $loaded_appointment->alert == '-1') echo "selected"; ?>>Do not alert me</option>
 							<option value="30" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '30') echo "selected"; ?>>30 minutes before</option>
 							<option value="60" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '60') echo "selected"; ?>>1 hour before</option>
 							<option value="120" <?php if(!empty($loaded_appointment->id) && $loaded_appointment->alert == '120') echo "selected"; ?>>2 hours before</option>

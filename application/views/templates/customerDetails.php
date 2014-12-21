@@ -91,11 +91,11 @@
 				  </div>
 				  <div class="form-group">
 				   <label for="username">Username</label>
-				   <input type="text" class="form-control" id="username" name="username" placeholder="" required value="<?php if(!empty($customer->username)) echo $customer->username;?>">
+				   <input type="text" class="form-control" id="username" name="username" placeholder="" value="<?php if(!empty($customer->username)) echo $customer->username;?>">
 				  </div>
 				  <div class="form-group">
 				   <label for="password">Password</label>
-				   <input type="password" class="form-control" id="password" name="password" placeholder="" required value="">
+				   <input type="password" class="form-control" id="password" name="password" placeholder="" value="">
 				  </div>
 				  <div class="overlay edit_policy_overlay" style="display: none;"></div>
 				</div>

@@ -50,6 +50,15 @@ class Messages extends MY_Controller {
 		$this->load->view('templates/messagesList');
 	}
 	
+	public function getUnreadMessages(){
+		$data['messages'] = $this->messages_model->getMessages(FALSE, FALSE, 'R', FALSE, TRUE);
+		$data['num_messages'] = sizeof($data['messages']);
+		
+		$this->load->vars($data);
+		
+		$this->load->view('templates/unreadMessages');
+	}
+	
 	public function sendMessage(){
 		$customer_id = $this->input->post('customer_id');
 		$message_text = $this->input->post('message_text');

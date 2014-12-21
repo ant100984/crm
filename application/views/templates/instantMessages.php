@@ -74,6 +74,20 @@
 	
 </div><!-- /.box (chat box) --> 
 <script type="text/javascript">
+
+	function refreshMessages(){
+	
+		setInterval(function () {
+		
+			filterMessages();
+			
+		}, 10000);
+	
+	}
+	
+	refreshMessages();
+	scrollMessagesToBottom(true);
+	
 	$('.unread_message').waypoint(function() {
 	
 		if($(this).hasClass("unread_message")){

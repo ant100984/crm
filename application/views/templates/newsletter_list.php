@@ -30,7 +30,7 @@
 					echo "<td>";
 					echo "<a href='".base_url()."index.php/newsletter/index/{$newsletter->id}' class='btn btn-xs btn-info' role='button'><span class='glyphicon glyphicon-pencil'></span> Details</a>";
 					if($newsletter->status == "DRAFT")
-						echo "<a href='".base_url()."index.php/newsletter/delete/{$newsletter->id}' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
+						echo "<a href='".base_url()."index.php/newsletter/delete/{$newsletter->id}' onclick='return askConfirm();' class='btn btn-xs btn-danger' role='button'><span class='glyphicon glyphicon-trash'></span> Delete</a>";
 					echo "</td>";
 					echo "</tr>";
 				} ?>
@@ -38,3 +38,9 @@
 		</table>
 	</div>
 </div>
+<script type="text/javascript">
+	function askConfirm(){
+		var result = confirm("Are you sure? The operation is not reversible.");
+		return result;
+	}
+</script>

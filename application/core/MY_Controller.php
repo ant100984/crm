@@ -12,9 +12,13 @@ class MY_Controller extends CI_Controller {
 		$this->load->library('session');
 		
 		$messages = $this->messages_model->getMessages(FALSE,FALSE,'R',FALSE,'yes');
+		$notifications = $this->users_model->getUserNotifications();
 		
 		$data['messages'] = $messages;
 		$data['num_messages'] = sizeof($messages);
+		
+		$data['notifications'] = $notifications;
+		$data['num_notifications'] = sizeof($notifications);
 		
 		$username = $this->session->userdata('username');
 		$userid = $this->session->userdata('userid');

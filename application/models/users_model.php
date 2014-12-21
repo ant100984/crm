@@ -238,4 +238,35 @@ class Users_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+	
+	public function getUserNotifications($userid=FALSE, $unread=TRUE){
+		$this->db->select('date_format(n.dtmnotification,"%d/%m/%Y %H:%i:%s") as ndate, n.*', FALSE);
+		$this->db->from("notifications n");
+				
+		if($userid !== FALSE)
+			$this->db->where("n.user",$userid);
+		
+		if($unread !== FALSE)
+			$this->db->where("n.read is null");
+			
+		$this->db->order_by("n.dtmnotification","desc");
+		
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	public function setReadNotifications(){
+		$data = array("read"=>1);
+		$this->db->update("notifications", $data);
+	}
+	
+	public function insertNotification($text){
+		date_default_timezone_set('Asia/Singapore');
+		
+		$data = array("text"=>$text,
+					  "dtmnotification"=>date("Y-m-d H:i:s"),
+					  "read"=>NULL
+					);
+		$this->db->insert("notifications", $data);
+	}
 }

@@ -25,7 +25,7 @@ class Newsletter_model extends CI_Model {
 	
 	public function getNewsletter($newsletter_id=FALSE,$status=FALSE){
 		
-		$this->db->select("n.id, n.body, n.template_id, IF(t.title IS NULL, '', t.title) AS template_name, if(n.status='DRAFT' or n.status = 'SENT',n.status,if(n.status='TO_BE_SENT','TO BE SENT','')) as status, date_format(n.dtmsent,'%d/%m/%Y %h:%i:%s') as dtmsent, us.username as usersent, date_format(n.dtmcreated,'%d/%m/%Y %h:%i:%s') as dtmcreated, uc.username as usercreated, SUM(IF(nc.customer IS NULL, 0, 1)) AS customers",FALSE);
+		$this->db->select("n.id, n.subject, n.body, n.template_id, IF(t.title IS NULL, '', t.title) AS template_name, if(n.status='DRAFT' or n.status = 'SENT',n.status,if(n.status='TO_BE_SENT','TO BE SENT','')) as status, date_format(n.dtmsent,'%d/%m/%Y %h:%i:%s') as dtmsent, us.username as usersent, date_format(n.dtmcreated,'%d/%m/%Y %h:%i:%s') as dtmcreated, uc.username as usercreated, SUM(IF(nc.customer IS NULL, 0, 1)) AS customers",FALSE);
 		$this->db->from("newsletters n");
 		$this->db->join("newsletter_customer nc","nc.newsletter = n.id","left");
 		$this->db->join("newsletter_templates t","t.id = n.template_id","left");
@@ -48,12 +48,13 @@ class Newsletter_model extends CI_Model {
 			return $query->result();
 	}
 	
-	public function saveNewsletter($newsletter_id=FALSE, $template_id, $newsletter_body, $status="DRAFT", $user){
+	public function saveNewsletter($newsletter_id=FALSE, $template_id, $newsletter_subject, $newsletter_body, $status="DRAFT", $user){
 		date_default_timezone_set('Asia/Singapore');
 		
 		$data = array(
 			"dtmcreated" => date("Y-m-d H:i:s"),
 			"template_id" => $template_id === FALSE ? null : $template_id,
+			"subject"=>$newsletter_subject,
 			"body" => $newsletter_body,
 			"status" => $status
 		);

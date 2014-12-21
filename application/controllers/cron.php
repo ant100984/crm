@@ -25,7 +25,7 @@ class Cron extends CI_Controller {
 			
 			$customers = $this->newsletter_model->getNewsletterCustomers($newsletter->id);
 			$attachments = $this->newsletter_model->getAttachments($newsletter->id);
-			$subject = "TODO";
+			$subject = $newsletter->subject;
 			$message = $newsletter->body;
 			
 			foreach($customers as $customer){
@@ -43,6 +43,7 @@ class Cron extends CI_Controller {
 			}
 			
 			$this->newsletter_model->updateNewsletterStatus($newsletter->id, "SENT");
+			$this->users_model->insertNotification("Newsletter sent: " . $subject);
 		}
     }
 	
@@ -66,6 +67,8 @@ class Cron extends CI_Controller {
 			$body .= "Start date: ". $appointment->start_date. " End date: ".$appointment->end_date . "\n\r";
 			$body .= "Location : ".$appointment->location."\n\r";
 			$body .= "Subject: ".$appointment->subject." Message: ".$appointment->message."\n\n";
+			
+			$this->users_model->insertNotification("Appointment Reminder : " . $appointment->firstname. " " .$appointment->lastname . " " . $appointment->start_date);
 			
 			$this->email->from($from_address, $from_name);
 			

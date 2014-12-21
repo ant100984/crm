@@ -44,6 +44,52 @@
 		
 		<!-- CK editor -->
 		<script src="//cdn.ckeditor.com/4.4.6/standard/ckeditor.js"></script>
+		<script type="text/javascript">
+			function ceckUnreadMessages(){
+				var val = <?php echo $userid; ?>;
+				
+				$.ajax({
+				  type: "POST",
+				  url: "<?php echo base_url() . "/index.php/messages/getUnreadMessages"; ?>",
+				  data: {user_id: val}
+				}).done(function(data) {
+					$('#unread_messages').html(data);
+				});
+			}
+			
+			function refreshUnreadMessages(){
+	
+				setInterval(function () {
+				
+					ceckUnreadMessages();
+					
+				}, 10000);
+			
+			}
+			
+			function ceckUnreadNotifications(){
+				$.ajax({
+				  type: "POST",
+				  url: "<?php echo base_url() . "/index.php/crmusers/getUnreadNotifications"; ?>"
+				}).done(function(data) {
+					$('#unread_notifications').html(data);
+				});
+			}
+			
+			function refreshUnreadNotifications(){
+	
+				setInterval(function () {
+				
+					ceckUnreadNotifications();
+					
+				}, 10000);
+			
+			}
+			
+			refreshUnreadMessages();
+			refreshUnreadNotifications();
+			
+		</script>
     </head>
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
@@ -64,80 +110,16 @@
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope"></i>
-                                <span class="label label-success"><?php echo $num_messages; ?></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have <?php echo $num_messages . ($num_messages == 1 ? ' message' : ' messages'); ?> </li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <?php
-										foreach($messages as $message){
-										?>
-											<li><!-- start message -->
-												<a href="#">
-													<div class="pull-left">
-														<img src="<?php echo base_url().$message->sender_photo; ?>" class="img-circle" alt="User Image"/>
-													</div>
-													<h4>
-														<?php echo $message->sender_firstname.' '.$message->sender_lastname; ?>
-														<small><i class="fa fa-clock-o"></i><?php echo $message->datesent; ?></small>
-													</h4>
-													<p><?php echo $message->messagetext; ?></p>
-												</a>
-											</li><!-- end message -->
-										<?php
-										}
-										?>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="<?php echo base_url()."index.php/messages"; ?>">See All Messages</a></li>
-                            </ul>
+                        <li class="dropdown messages-menu" id="unread_messages">
+                            <?php
+								require_once('unreadMessages.php');
+							?>
                         </li>
 						<!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-warning"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="ion ion-ios7-people info"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning danger"></i> Very long description here that may not fit into the page and may cause design problems
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users warning"></i> 5 new members joined
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#">
-                                                <i class="ion ion-ios7-cart success"></i> 25 sales made
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="ion ion-ios7-person danger"></i> You changed your username
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
+                        <li class="dropdown notifications-menu" id="unread_notifications">
+                            <?php
+								require_once('unreadNotifications.php');
+							?>
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">

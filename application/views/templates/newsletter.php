@@ -48,6 +48,23 @@
 
 			<div class='box'>
 				<div class='box-header'>
+					<h3 class='box-title'>Edit the newsletter subject</h3>
+					<!-- tools box -->
+					<div class="pull-right box-tools">
+						<button type="button" class="btn btn-default btn-sm" data-widget='collapse' data-toggle="tooltip"><i class="fa fa-minus"></i></button>
+					</div><!-- /. tools -->
+				</div><!-- /.box-header -->
+				<div class='box-body pad'>
+					
+					<input type="text" class="form-control"  <?php if(!$editable) echo "disabled"; ?> name="newsletter_subject" id="newsletter_subject" value="<?php if(!empty($loaded_newsletter->id)) echo $loaded_newsletter->subject; ?>" />
+					
+				</div>
+				<div class="overlay body-overlay" style="display: none;"></div>
+				<div class="loading-img body-loading-img" style="display: none;"></div>
+			</div>
+			
+			<div class='box'>
+				<div class='box-header'>
 					<h3 class='box-title'>Edit the newsletter body</h3>
 					<!-- tools box -->
 					<div class="pull-right box-tools">
