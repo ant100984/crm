@@ -164,6 +164,7 @@ class Users_model extends CI_Model {
 		$this->db->from('users u');
 		$this->db->where('u.username',$username);
 		$this->db->where('u.password',md5($password));
+		$this->db->where('u.enabled',1);
 		
 		$query = $this->db->get();
 		
